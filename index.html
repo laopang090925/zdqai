@@ -13,25 +13,23 @@
   --blue:#1868DB; --blue-strong:#0C5BCE; --blue-soft:#E9F2FF; --blue-soft2:#F2F7FF;
   --ink:#172B4D; --ink-2:#44546F; --ink-3:#626F86; --ink-4:#8993A4;
   --line:#E4E6EB; --line-2:#EDEFF2; --canvas:#F7F8FA; --white:#FFFFFF;
-  --green:#1F845A; --green-bg:#DCFFF1; --orange:#974F0C; --orange-bg:#FFF3E5;
-  --red:#C9372C; --red-bg:#FFECEB; --purple:#5E4DB2; --purple-bg:#EDEBFF;
+  --green:#256E47; --green-bg:#DFF0E8; --orange:#8A3A0A; --orange-bg:#FDF0D8;
+  --red:#9A1F1F; --red-bg:#FDEAEA; --purple:#4A3899; --purple-bg:#EEEBFB;
   --teal:#206A83; --teal-bg:#E3FAFC;
   --radius:8px; --radius-lg:12px;
   --shadow:0 1px 1px rgba(9,30,66,.08),0 0 1px rgba(9,30,66,.12);
   --shadow-pop:0 8px 24px -4px rgba(9,30,66,.18),0 0 1px rgba(9,30,66,.2);
   --font:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
 
-  /* ---- refreshed tokens (agents / kb / issues pages) ---- */
-  --color-table-header:#F3F4F6;
-  --color-border:#E5E7EB;
-  --color-text-primary:#111827;
-  --color-text-secondary:#6B7280;
-  --color-brand:#4F46E5;
+  --color-table-header:#F8F9FA;
+  --color-border:#E4E6EB;
+  --color-text-secondary:#626F86;
+  --color-brand:#1868DB;
   --color-brand-text:#FFFFFF;
-  --color-invite-bg:#EDE9FE; --color-invite-text:#5B21B6; --color-invite-icon:#4F46E5;
-  --color-pending-bg:#FEF3C7; --color-pending-text:#B45309; --color-pending-icon:#F97316;
-  --color-active-bg:#D1FAE5; --color-active-text:#047857; --color-active-icon:#22C55E;
-  --radius-sm:8px; --radius-pill:9999px; --spacing-base:8px;
+  --color-invite-bg:#EEEBFB; --color-invite-text:#4A3899; --color-invite-icon:#5B4ED6;
+  --color-pending-bg:#FDF0D8; --color-pending-text:#8A3A0A; --color-pending-icon:#C2740A;
+  --color-active-bg:#DFF0E8; --color-active-text:#256E47; --color-active-icon:#2D8A59;
+  --radius-sm:8px; --radius-pill:9999px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
@@ -102,29 +100,26 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .btn.ghost:hover{background:var(--line-2)}
 
 /* toolbar filters */
-.toolbar{display:flex;align-items:center;gap:9px;margin-bottom:14px;flex-wrap:nowrap;overflow:visible}
+.toolbar{display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:nowrap;overflow:visible}
 .fbtn{position:relative;display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 13px;border-radius:var(--radius-pill);font-size:13px;font-weight:500;background:var(--white);border:1px solid var(--color-border);color:var(--ink-2);cursor:pointer;user-select:none}
 .fbtn:hover{background:var(--canvas)}
 .fbtn svg{width:14px;height:14px;color:var(--ink-3)}
 .fbtn b{color:var(--ink);font-weight:600;margin-left:auto}
 .fbtn .chev{margin-left:1px}
 .fbtn.open{border-color:var(--color-brand);color:var(--ink)}
-#agentStatusBtn{min-width:114px}
-#agentModelBtn{min-width:164px}
-#kbCoBtn,#issueCoBtn{min-width:200px}
-#kbTagBtn{min-width:132px}
-#kbStBtn{min-width:118px}
-#issueCatBtn{min-width:132px}
-#issueSortBtn{min-width:126px}
+#agentModelBtn{min-width:148px}
+#issueCoBtn{min-width:180px}
+#issueCatBtn{min-width:120px}
+#issueSortBtn{min-width:114px}
 .dd-menu{position:absolute;top:calc(100% + 6px);left:0;min-width:150px;background:#fff;border:1px solid var(--color-border);border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,.1);z-index:300;display:none;overflow:hidden}
 .fbtn.open .dd-menu{display:block}
 .dd-item{padding:9px 14px;font-size:13px;color:var(--ink-2);cursor:pointer;white-space:nowrap}
 .dd-item:hover{background:var(--canvas)}
 .dd-item.on{color:var(--color-brand);font-weight:600;background:var(--color-invite-bg)}
 .spacer{flex:1}
-.seg{display:inline-flex;background:var(--canvas);border:1px solid var(--color-brand);border-radius:8px;padding:2px}
-.seg button{height:28px;padding:0 12px;border-radius:6px;font-size:12.5px;font-weight:600;color:var(--ink-3)}
-.seg button.on{background:var(--color-brand);color:#fff;box-shadow:none}
+.seg{display:inline-flex;background:var(--canvas);border:1px solid var(--color-border);border-radius:8px;padding:2px}
+.seg button{height:28px;padding:0 13px;border-radius:6px;font-size:12.5px;font-weight:500;color:var(--ink-3)}
+.seg button.on{background:var(--blue);color:#fff;font-weight:600;box-shadow:none}
 
 /* cards / panels */
 .panel{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow)}
@@ -162,21 +157,21 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .legend .pc{margin-left:auto;font-weight:600;color:var(--ink)}
 
 /* tables */
-.tbl-wrap{background:var(--white);border:1px solid var(--color-border);border-radius:var(--radius-lg);overflow:hidden}
-table{width:100%;border-collapse:collapse}
-thead th{text-align:left;font-size:13px;font-weight:500;color:var(--color-text-secondary);padding:13px 16px;background:var(--color-table-header);border-bottom:1px solid var(--color-border);white-space:nowrap}
-tbody td{padding:18px 16px;border-bottom:1px solid var(--color-border);font-size:13.5px;vertical-align:middle}
+.tbl-wrap{background:var(--white);border:1px solid var(--color-border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:0 1px 3px rgba(9,30,66,.06)}
+table{width:100%;border-collapse:collapse;table-layout:fixed}
+thead th{text-align:left;font-size:12.5px;font-weight:600;color:var(--ink-4);padding:11px 18px;background:var(--color-table-header);border-bottom:1px solid var(--color-border);white-space:nowrap;overflow:hidden;letter-spacing:.1px}
+tbody td{padding:14px 18px;border-bottom:1px solid var(--color-border);font-size:13.5px;vertical-align:middle;overflow:hidden;color:var(--ink-2)}
 tbody tr:last-child td{border-bottom:none}
-tbody tr{transition:background .12s}
-tbody tr:hover{background:#F9FAFB}
-.tbl-foot{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;color:var(--ink-4);font-size:12.5px;background:var(--canvas);border-top:1px solid var(--line)}
-.cell-main{font-weight:600;color:var(--ink)}
-.cell-sub{font-size:12px;color:var(--ink-4);margin-top:1px}
+tbody tr{transition:background .1s}
+tbody tr:hover{background:rgba(24,104,219,.03)}
+.tbl-foot{display:flex;align-items:center;justify-content:space-between;padding:10px 18px;color:var(--ink-4);font-size:12.5px;background:var(--color-table-header);border-top:1px solid var(--color-border)}
+.cell-main{font-weight:600;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cell-sub{font-size:12px;color:var(--ink-4);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 td.right,th.right{text-align:right}
 .row-link{cursor:pointer}
 
 /* company / agent cell */
-.co{display:flex;align-items:center;gap:11px}
+.co{display:flex;align-items:center;gap:11px;overflow:hidden}
 .co-logo{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:#fff;flex:0 0 auto}
 .co-logo svg{width:17px;height:17px}
 
@@ -186,11 +181,10 @@ td.right,th.right{text-align:right}
 .pill .pdot{width:6px;height:6px;border-radius:50%}
 .p-green{background:var(--color-active-bg);color:var(--color-active-text)}
 .p-orange{background:var(--color-pending-bg);color:var(--color-pending-text)}
-.p-red{background:#FED7D7;color:#C53030}
 .p-red{background:var(--red-bg);color:var(--red)}
 .p-purple{background:var(--color-invite-bg);color:var(--color-invite-text)}
-.p-blue{background:var(--color-invite-bg);color:var(--color-invite-text)}
-.p-gray{background:#E5E7EB;color:#374151}
+.p-blue{background:#E8F0FD;color:#1A3D8C}
+.p-gray{background:#EDEEF0;color:#505869}
 .p-teal{background:var(--teal-bg);color:var(--teal)}
 
 /* tags */
@@ -209,17 +203,17 @@ td.right,th.right{text-align:right}
 /* list rows (dashboard) */
 .lrow{display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid var(--line-2)}
 .lrow:last-child{border-bottom:none}
-.lrow:hover{background:var(--blue-soft2)}
+.lrow:hover{background:rgba(24,104,219,.04)}
 .lrow .qn{flex:1;min-width:0}
 .lrow .qn b{font-size:13.5px;font-weight:600;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .lrow .qn span{font-size:12px;color:var(--ink-4)}
 .cnt{font-weight:700;font-variant-numeric:tabular-nums;color:var(--ink);font-size:14px}
 
-/* drawer */
-.scrim{position:fixed;inset:0;background:rgba(9,30,66,.45);opacity:0;pointer-events:none;transition:opacity .25s;z-index:40}
-.scrim.show{opacity:1;pointer-events:auto}
-.drawer{position:fixed;top:0;right:0;height:100vh;width:560px;max-width:94vw;background:var(--canvas);box-shadow:var(--shadow-pop);transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);z-index:50;display:flex;flex-direction:column}
-.drawer.show{transform:none}
+/* drawer → centered modal */
+.drawer{position:fixed;inset:0;background:rgba(9,30,66,.5);display:flex;align-items:center;justify-content:center;z-index:50;opacity:0;pointer-events:none;transition:opacity .2s}
+.drawer.show{opacity:1;pointer-events:auto}
+#drawerInner{background:var(--white);border-radius:14px;width:700px;max-width:92vw;max-height:86vh;box-shadow:0 12px 56px rgba(9,30,66,.28);overflow:hidden;display:flex;flex-direction:column;transform:scale(.95) translateY(12px);transition:transform .24s cubic-bezier(.34,1.2,.64,1)}
+.drawer.show #drawerInner{transform:none}
 .dr-head{background:var(--white);border-bottom:1px solid var(--line);padding:18px 22px;display:flex;align-items:flex-start;gap:14px;flex:0 0 auto}
 .dr-head .x{margin-left:auto}
 .dr-body{overflow-y:auto;padding:20px 22px;flex:1}
@@ -251,7 +245,7 @@ td.right,th.right{text-align:right}
 .ai-suggest .draft b{color:var(--ink)}
 
 /* modal */
-.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:60}
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:60;background:rgba(9,30,66,.5)}
 .modal.show{display:flex;animation:fade .2s}
 .modal-box{background:var(--white);border-radius:14px;width:560px;max-width:92vw;box-shadow:var(--shadow-pop);overflow:hidden;max-height:88vh;display:flex;flex-direction:column}
 .modal-h{display:flex;align-items:center;gap:11px;padding:18px 22px;border-bottom:1px solid var(--line)}
@@ -397,34 +391,13 @@ td.right,th.right{text-align:right}
             <button data-ch="phone" onclick="setAgentCh('phone')"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>AI 电话客服系统</button>
           </div>
           <div class="spacer"></div>
-          <div class="search" style="width:180px;height:32px">
-            <i data-lucide="search"></i><input placeholder="搜索公司或智能体…">
-          </div>
-          <button class="fbtn" id="agentStatusBtn" onclick="toggleDd('agentStatusDd',this)"><i data-lucide="filter"></i>状态：<b id="agentStatusLbl">全部</b><i data-lucide="chevron-down" class="chev"></i>
-            <div class="dd-menu" id="agentStatusDd" onclick="event.stopPropagation()">
-              <div class="dd-item on" onclick="setFbtn('agentStatusBtn','agentStatusLbl','agentStatusDd',this,'全部')">全部</div>
-              <div class="dd-item" onclick="setFbtn('agentStatusBtn','agentStatusLbl','agentStatusDd',this,'运行中')">运行中</div>
-              <div class="dd-item" onclick="setFbtn('agentStatusBtn','agentStatusLbl','agentStatusDd',this,'调试中')">调试中</div>
-              <div class="dd-item" onclick="setFbtn('agentStatusBtn','agentStatusLbl','agentStatusDd',this,'已停用')">已停用</div>
-            </div>
-          </button>
-          <button class="fbtn" id="agentModelBtn" onclick="toggleDd('agentModelDd',this)"><i data-lucide="cpu"></i>模型：<b id="agentModelLbl">全部</b><i data-lucide="chevron-down" class="chev"></i>
-            <div class="dd-menu" id="agentModelDd" onclick="event.stopPropagation()">
-              <div class="dd-item on" onclick="setFbtn('agentModelBtn','agentModelLbl','agentModelDd',this,'全部')">全部</div>
-              <div class="dd-item" onclick="setFbtn('agentModelBtn','agentModelLbl','agentModelDd',this,'DeepSeek-V3')">DeepSeek-V3</div>
-              <div class="dd-item" onclick="setFbtn('agentModelBtn','agentModelLbl','agentModelDd',this,'通义千问-Max')">通义千问-Max</div>
-              <div class="dd-item" onclick="setFbtn('agentModelBtn','agentModelLbl','agentModelDd',this,'通义千问-Plus')">通义千问-Plus</div>
-              <div class="dd-item" onclick="setFbtn('agentModelBtn','agentModelLbl','agentModelDd',this,'文心一言 4.0')">文心一言 4.0</div>
-            </div>
-          </button>
-          <button class="btn primary" style="height:32px;font-size:12.5px;white-space:nowrap"><i data-lucide="plus"></i>接入新公司</button>
+          <button class="btn primary" style="height:32px;font-size:12.5px;white-space:nowrap" onclick="openNewAgent()"><i data-lucide="plus"></i>新建智能体</button>
         </div>
         <div class="tbl-wrap">
           <table>
             <thead><tr id="agentThead"></tr></thead>
             <tbody id="agentRows"></tbody>
           </table>
-          <div class="tbl-foot"><span>共 9 家公司</span><span>每页 9 条</span></div>
         </div>
       </section>
 
@@ -436,62 +409,20 @@ td.right,th.right{text-align:right}
           </div>
         </div>
         <div class="toolbar">
-          <div class="seg" id="kbChTab">
-            <button class="on" data-ch="all" onclick="setKbCh('all')"><i data-lucide="layers" style="width:13px;height:13px;vertical-align:-2px;margin-right:4px"></i>全部渠道</button>
-            <button data-ch="app" onclick="setKbCh('app')"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><path d="M12 6V2H8"/><path d="M15 11v2"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M20 16a2 2 0 0 1-2 2H8.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 4 20.286V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z"/><path d="M9 11v2"/></svg>APP 智能客服中心</button>
-            <button data-ch="phone" onclick="setKbCh('phone')"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>AI 电话客服系统</button>
+          <div class="search" style="width:200px;height:32px">
+            <i data-lucide="search"></i><input placeholder="搜索智能体或公司…">
           </div>
           <div class="spacer"></div>
-          <div class="search" style="width:180px;height:32px">
-            <i data-lucide="search"></i><input placeholder="搜索文档名称">
-          </div>
-          <button class="fbtn" id="kbCoBtn" onclick="toggleDd('kbCoDd',this)"><i data-lucide="building-2"></i>公司：<b id="kbCoLbl">全部</b><i data-lucide="chevron-down" class="chev"></i>
-            <div class="dd-menu" id="kbCoDd" onclick="event.stopPropagation()">
-              <div class="dd-item on" onclick="setFbtn('kbCoBtn','kbCoLbl','kbCoDd',this,'全部')">全部</div>
-              <div class="dd-item" onclick="setFbtn('kbCoBtn','kbCoLbl','kbCoDd',this,'临沂公交')">临沂公交</div>
-              <div class="dd-item" onclick="setFbtn('kbCoBtn','kbCoLbl','kbCoDd',this,'哈尔滨公交')">哈尔滨公交</div>
-              <div class="dd-item" onclick="setFbtn('kbCoBtn','kbCoLbl','kbCoDd',this,'琴岛公交')">琴岛公交</div>
-              <div class="dd-item" onclick="setFbtn('kbCoBtn','kbCoLbl','kbCoDd',this,'大连公交')">大连公交</div>
-              <div class="dd-item" onclick="setFbtn('kbCoBtn','kbCoLbl','kbCoDd',this,'长春公交')">长春公交</div>
-              <div class="dd-item" onclick="setFbtn('kbCoBtn','kbCoLbl','kbCoDd',this,'淄博公交')">淄博公交</div>
-              <div class="dd-item" onclick="setFbtn('kbCoBtn','kbCoLbl','kbCoDd',this,'淮安公交')">淮安公交</div>
-              <div class="dd-item" onclick="setFbtn('kbCoBtn','kbCoLbl','kbCoDd',this,'大元公交')">大元公交</div>
-              <div class="dd-item" onclick="setFbtn('kbCoBtn','kbCoLbl','kbCoDd',this,'沧州公交')">沧州公交</div>
-            </div>
-          </button>
-          <button class="fbtn" id="kbTagBtn" onclick="toggleDd('kbTagDd',this)"><i data-lucide="tag"></i>标签：<b id="kbTagLbl">全部</b><i data-lucide="chevron-down" class="chev"></i>
-            <div class="dd-menu" id="kbTagDd" onclick="event.stopPropagation()">
-              <div class="dd-item on" onclick="setFbtn('kbTagBtn','kbTagLbl','kbTagDd',this,'全部')">全部</div>
-              <div class="dd-item" onclick="setFbtn('kbTagBtn','kbTagLbl','kbTagDd',this,'线路查询')">线路查询</div>
-              <div class="dd-item" onclick="setFbtn('kbTagBtn','kbTagLbl','kbTagDd',this,'票价政策')">票价政策</div>
-              <div class="dd-item" onclick="setFbtn('kbTagBtn','kbTagLbl','kbTagDd',this,'运营时刻')">运营时刻</div>
-              <div class="dd-item" onclick="setFbtn('kbTagBtn','kbTagLbl','kbTagDd',this,'优惠卡办理')">优惠卡办理</div>
-              <div class="dd-item" onclick="setFbtn('kbTagBtn','kbTagLbl','kbTagDd',this,'乘车规则')">乘车规则</div>
-              <div class="dd-item" onclick="setFbtn('kbTagBtn','kbTagLbl','kbTagDd',this,'失物招领')">失物招领</div>
-              <div class="dd-item" onclick="setFbtn('kbTagBtn','kbTagLbl','kbTagDd',this,'投诉建议')">投诉建议</div>
-            </div>
-          </button>
-          <button class="fbtn" id="kbStBtn" onclick="toggleDd('kbStDd',this)"><i data-lucide="circle-dot"></i>状态：<b id="kbStLbl">全部</b><i data-lucide="chevron-down" class="chev"></i>
-            <div class="dd-menu" id="kbStDd" onclick="event.stopPropagation()">
-              <div class="dd-item on" onclick="setFbtn('kbStBtn','kbStLbl','kbStDd',this,'全部')">全部</div>
-              <div class="dd-item" onclick="setFbtn('kbStBtn','kbStLbl','kbStDd',this,'已发布')">已发布</div>
-              <div class="dd-item" onclick="setFbtn('kbStBtn','kbStLbl','kbStDd',this,'解析中')">解析中</div>
-              <div class="dd-item" onclick="setFbtn('kbStBtn','kbStLbl','kbStDd',this,'草稿')">草稿</div>
-              <div class="dd-item" onclick="setFbtn('kbStBtn','kbStLbl','kbStDd',this,'解析失败')">解析失败</div>
-            </div>
-          </button>
-          <button class="btn" style="height:32px;font-size:12.5px;white-space:nowrap"><i data-lucide="folder-tree"></i>标签管理</button>
           <button class="btn primary" style="height:32px;font-size:12.5px;white-space:nowrap" onclick="openUpload()"><i data-lucide="upload"></i>上传知识库</button>
         </div>
         <div class="tbl-wrap">
           <table>
             <thead><tr>
-              <th style="width:30%">文档名称</th><th>标签</th><th>适用渠道</th><th>状态</th>
-              <th class="right">命中次数</th><th>切片</th><th>上传人</th><th>更新时间</th>
+              <th style="width:28%">智能体名称</th><th style="width:14%">所属公司</th><th style="width:22%">适用渠道</th>
+              <th style="width:80px">文档数量</th><th style="width:100px">最近操作人</th><th style="width:130px;white-space:nowrap">最近更新时间</th><th style="width:90px">操作</th>
             </tr></thead>
             <tbody id="kbRows"></tbody>
           </table>
-          <div class="tbl-foot"><span id="kbFootCount">共 11 个文档</span><span>1 / 2 页</span></div>
         </div>
       </section>
 
@@ -509,17 +440,29 @@ td.right,th.right{text-align:right}
             <button data-ch="phone" onclick="setAnaCh('phone')"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>AI 电话客服系统</button>
           </div>
           <div class="spacer"></div>
-          <div class="search" style="width:190px;height:32px">
-            <i data-lucide="search"></i><input placeholder="搜索公司或数据…">
+          <button class="fbtn" id="anaCoBtn" onclick="toggleDd('anaCoDd',this)"><i data-lucide="building-2"></i><span id="anaCoLbl">全部公司</span><i data-lucide="chevron-down" class="chev"></i>
+            <div class="dd-menu" id="anaCoDd" onclick="event.stopPropagation()">
+              <div class="dd-item on" onclick="pickAnaCo(null,this)">全部公司</div>
+            </div>
+          </button>
+          <div style="display:inline-flex;align-items:center;gap:6px;border:1px solid var(--color-border);border-radius:var(--radius-pill);padding:0 12px;height:34px;background:#fff;font-size:13px;color:var(--ink)">
+            <i data-lucide="calendar" style="width:14px;height:14px;color:var(--ink-3)"></i>
+            <input type="date" id="anaDateStart" value="2026-06-01" style="border:none;outline:none;font-size:13px;color:var(--ink);background:transparent;cursor:pointer">
+            <span style="color:var(--ink-4)">—</span>
+            <input type="date" id="anaDateEnd" value="2026-06-30" style="border:none;outline:none;font-size:13px;color:var(--ink);background:transparent;cursor:pointer">
           </div>
-          <button class="fbtn"><i data-lucide="building-2"></i>全部公司<i data-lucide="chevron-down" class="chev"></i></button>
-          <button class="fbtn"><i data-lucide="calendar"></i>近 30 天<i data-lucide="chevron-down" class="chev"></i></button>
           <button class="btn" style="height:32px;font-size:12.5px"><i data-lucide="download"></i>导出</button>
         </div>
         <div class="kpis" id="anaKpis" style="grid-template-columns:repeat(5,1fr)"></div>
         <div class="grid-2">
           <div class="panel">
-            <div class="panel-h"><h3 id="anaTrendTitle">问答量与 Token 消耗</h3><span class="sub" id="anaTrendSub">双轴 · 近 30 天</span></div>
+            <div class="panel-h">
+              <h3 id="anaTrendTitle">问答量趋势</h3>
+              <div class="seg" id="anaTrendTab">
+                <button class="on" id="anaTrendPrimBtn" onclick="setAnaTrend('primary',this)">问答量</button>
+                <button id="anaTrendSecBtn" onclick="setAnaTrend('secondary',this)">Token</button>
+              </div>
+            </div>
             <div class="panel-b"><div class="chart-wrap"><canvas id="anaTrend"></canvas></div></div>
           </div>
           <div class="panel">
@@ -546,7 +489,7 @@ td.right,th.right{text-align:right}
             <h1>未命中意图</h1>
           </div>
           <div class="phead-actions">
-            <button class="btn" onclick="genOptList()"><i data-lucide="sparkles"></i>一键生成本周优化清单</button>
+            <button class="btn" onclick="genOptList()"><i data-lucide="sparkles"></i>一键生成优化清单</button>
           </div>
         </div>
 
@@ -599,12 +542,11 @@ td.right,th.right{text-align:right}
         <div class="tbl-wrap">
           <table>
             <thead><tr>
-              <th style="width:32%">聚类问题</th><th>所属公司</th><th>分类</th><th>渠道</th>
-              <th class="right">出现次数</th><th>最近出现</th><th>状态</th>
+              <th style="width:32%">聚类问题</th><th style="width:15%">所属公司</th><th style="width:110px">分类</th><th style="width:110px">渠道</th>
+              <th class="right" style="width:90px">出现次数</th><th style="width:110px;white-space:nowrap">最近出现</th><th style="width:90px">状态</th>
             </tr></thead>
             <tbody id="issueRows"></tbody>
           </table>
-          <div class="tbl-foot"><span id="issueFootCount">待处理 · 共 47 个未命中意图</span><span>已自动归并相似提问 1,284 条</span></div>
         </div>
       </section>
 
@@ -613,10 +555,28 @@ td.right,th.right{text-align:right}
 </div>
 
 <!-- ===== DRAWER ===== -->
-<div class="scrim" id="scrim" onclick="closeDrawer()"></div>
-<aside class="drawer" id="drawer"><div id="drawerInner"></div></aside>
+<aside class="drawer" id="drawer" onclick="if(event.target===this)closeDrawer()"><div id="drawerInner"></div></aside>
 
 <!-- ===== UPLOAD MODAL ===== -->
+<div class="modal" id="newAgentModal">
+  <div class="modal-box" style="width:440px">
+    <div class="modal-h">
+      <h3>新建智能体</h3>
+      <button class="icon-btn x" onclick="closeNewAgent()"><i data-lucide="x"></i></button>
+    </div>
+    <div class="modal-b">
+      <label class="flabel">所属公司</label>
+      <input class="inp" id="newAgentCo" placeholder="请输入公司名称">
+      <label class="flabel">智能体名称</label>
+      <input class="inp" id="newAgentName" placeholder="请输入智能体名称">
+    </div>
+    <div class="modal-f">
+      <button class="btn" onclick="closeNewAgent()">取消</button>
+      <button class="btn primary" onclick="submitNewAgent()"><i data-lucide="check"></i>确认创建</button>
+    </div>
+  </div>
+</div>
+
 <div class="modal" id="uploadModal">
   <div class="modal-box">
     <div class="modal-h">
@@ -627,10 +587,16 @@ td.right,th.right{text-align:right}
       <div class="drop">
         <div class="di"><i data-lucide="cloud-upload"></i></div>
         <b>拖拽文件到此处，或点击选择</b>
-        <span>支持 PDF / Word / Excel / TXT / Markdown，单文件 ≤ 50MB</span>
+        <span>支持 PDF / Word ≤ 100MB · Excel ≤ 20MB · TXT ≤ 5MB</span>
       </div>
-      <label class="flabel">归属公司</label>
-      <input class="inp" value="大连公交集团" readonly>
+      <label class="flabel">所属智能体</label>
+      <div style="position:relative" id="agentSelectWrap">
+        <input class="inp" id="agentSelectInp" placeholder="选择或搜索智能体…" autocomplete="off"
+          oninput="filterAgentOpts(this.value)" onfocus="showAgentOpts()" onblur="hideAgentOpts()"
+          style="padding-right:32px">
+        <i data-lucide="chevron-down" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:var(--ink-4);pointer-events:none"></i>
+        <div id="agentOptsDd" style="display:none;position:absolute;left:0;right:0;top:calc(100% + 4px);background:var(--white);border:1px solid var(--line);border-radius:8px;box-shadow:0 4px 16px rgba(9,30,66,.12);z-index:200;max-height:200px;overflow-y:auto"></div>
+      </div>
       <label class="flabel">适用渠道 <span style="color:var(--ink-4);font-weight:400">· 该文档供哪些渠道的智能体检索</span></label>
       <div class="chip-pick" id="chPick">
         <button class="chip on" data-ch="app" onclick="this.classList.toggle('on')">APP 智能客服中心</button>
@@ -643,7 +609,23 @@ td.right,th.right{text-align:right}
     </div>
     <div class="modal-f">
       <button class="btn" onclick="closeUpload()">取消</button>
-      <button class="btn primary" onclick="closeUpload()"><i data-lucide="check"></i>上传并解析</button>
+      <button class="btn primary" onclick="closeUpload()"><i data-lucide="check"></i>上传并发布</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="deleteDocModal" onclick="if(event.target===this)closeDeleteDocModal()">
+  <div class="modal-box" style="width:360px">
+    <div class="modal-h">
+      <h3 style="color:var(--red)">删除文档</h3>
+      <button class="icon-btn x" onclick="closeDeleteDocModal()"><i data-lucide="x"></i></button>
+    </div>
+    <div class="modal-b" style="padding-top:4px;padding-bottom:8px">
+      <p style="margin:0;font-size:14px;color:var(--ink-2);line-height:1.6">确定要删除文档 <strong id="deleteDocName" style="color:var(--ink-1)"></strong> 吗？删除后无法恢复。</p>
+    </div>
+    <div class="modal-f">
+      <button class="btn" onclick="closeDeleteDocModal()">取消</button>
+      <button class="btn" style="background:var(--red);color:#fff;border-color:var(--red)" onclick="confirmDeleteDoc()">确认删除</button>
     </div>
   </div>
 </div>
@@ -656,56 +638,120 @@ const coColor = ['#0C5BCE','#974F0C','#206A83','#1F845A','#5E4DB2','#C9372C','#4
 /* 每家公司分别配置「APP 智能客服中心」与「AI 电话客服系统」两条独立渠道 */
 const companies = [
   {n:'临沂公交',init:'临',kb:42,
-    app:{a:'临沂公交·APP客服',m:'DeepSeek-V3',st:'run',q:18640,tokens:6.2,rate:92.1,up:'5 分钟前'},
-    phone:{a:'临沂公交·语音客服',m:'DeepSeek-V3',st:'run',calls:4280,avgDur:88,rate:88.4,up:'5 分钟前'}},
+    app:{a:'临沂公交·APP客服',m:'DeepSeek-V3',st:'run',q:18640,tokens:6.2,rate:92.1,up:'2026-07-01 10:25:00'},
+    phone:{a:'临沂公交·语音客服',m:'DeepSeek-V3',st:'run',calls:4280,avgDur:88,rate:88.4,up:'2026-07-01 10:25:00'}},
   {n:'哈尔滨公交',init:'哈',kb:63,
-    app:{a:'哈尔滨公交·APP客服',m:'通义千问-Max',st:'run',q:31200,tokens:10.8,rate:93.6,up:'8 分钟前'},
-    phone:{a:'哈尔滨公交·语音客服',m:'通义千问-Max',st:'run',calls:9840,avgDur:91,rate:90.2,up:'8 分钟前'}},
+    app:{a:'哈尔滨公交·APP客服',m:'通义千问-Max',st:'run',q:31200,tokens:10.8,rate:93.6,up:'2026-07-01 10:22:00'},
+    phone:{a:'哈尔滨公交·语音客服',m:'通义千问-Max',st:'run',calls:9840,avgDur:91,rate:90.2,up:'2026-07-01 10:22:00'}},
   {n:'琴岛公交',init:'琴',kb:38,
-    app:{a:'琴岛公交·APP客服',m:'DeepSeek-V3',st:'run',q:22480,tokens:7.6,rate:91.8,up:'12 分钟前'},
-    phone:{a:'琴岛公交·语音客服',m:'DeepSeek-V3',st:'run',calls:6120,avgDur:95,rate:87.9,up:'12 分钟前'}},
+    app:{a:'琴岛公交·APP客服',m:'DeepSeek-V3',st:'run',q:22480,tokens:7.6,rate:91.8,up:'2026-07-01 10:18:00'},
+    phone:{a:'琴岛公交·语音客服',m:'DeepSeek-V3',st:'run',calls:6120,avgDur:95,rate:87.9,up:'2026-07-01 10:18:00'}},
   {n:'大连公交',init:'连',kb:55,
-    app:{a:'大连公交·APP客服',m:'DeepSeek-V3',st:'run',q:28340,tokens:9.4,rate:94.2,up:'3 分钟前'},
-    phone:{a:'大连公交·语音客服',m:'DeepSeek-V3',st:'run',calls:7960,avgDur:84,rate:91.5,up:'3 分钟前'}},
+    app:{a:'大连公交·APP客服',m:'DeepSeek-V3',st:'run',q:28340,tokens:9.4,rate:94.2,up:'2026-07-01 10:27:00'},
+    phone:{a:'大连公交·语音客服',m:'DeepSeek-V3',st:'run',calls:7960,avgDur:84,rate:91.5,up:'2026-07-01 10:27:00'}},
   {n:'长春公交',init:'春',kb:47,
-    app:{a:'长春公交·APP客服',m:'通义千问-Plus',st:'run',q:19870,tokens:6.8,rate:90.4,up:'15 分钟前'},
-    phone:{a:'长春公交·语音客服',m:'通义千问-Plus',st:'run',calls:5340,avgDur:102,rate:86.7,up:'15 分钟前'}},
+    app:{a:'长春公交·APP客服',m:'通义千问-Plus',st:'run',q:19870,tokens:6.8,rate:90.4,up:'2026-07-01 10:15:00'},
+    phone:{a:'长春公交·语音客服',m:'通义千问-Plus',st:'run',calls:5340,avgDur:102,rate:86.7,up:'2026-07-01 10:15:00'}},
   {n:'淄博公交',init:'淄',kb:31,
-    app:{a:'淄博公交·APP客服',m:'DeepSeek-V3',st:'debug',q:8640,tokens:2.9,rate:83.2,up:'1 小时前'},
-    phone:{a:'淄博公交·语音客服',m:'DeepSeek-V3',st:'debug',calls:1860,avgDur:118,rate:79.6,up:'1 小时前'}},
+    app:{a:'淄博公交·APP客服',m:'DeepSeek-V3',st:'debug',q:8640,tokens:2.9,rate:83.2,up:'2026-07-01 09:30:00'},
+    phone:{a:'淄博公交·语音客服',m:'DeepSeek-V3',st:'debug',calls:1860,avgDur:118,rate:79.6,up:'2026-07-01 09:30:00'}},
   {n:'淮安公交',init:'淮',kb:29,
-    app:{a:'淮安公交·APP客服',m:'文心一言 4.0',st:'run',q:14320,tokens:4.8,rate:89.7,up:'20 分钟前'},
-    phone:{a:'淮安公交·语音客服',m:'文心一言 4.0',st:'run',calls:3980,avgDur:97,rate:85.3,up:'20 分钟前'}},
+    app:{a:'淮安公交·APP客服',m:'文心一言 4.0',st:'run',q:14320,tokens:4.8,rate:89.7,up:'2026-07-01 10:10:00'},
+    phone:{a:'淮安公交·语音客服',m:'文心一言 4.0',st:'run',calls:3980,avgDur:97,rate:85.3,up:'2026-07-01 10:10:00'}},
   {n:'大元公交',init:'元',kb:24,
-    app:{a:'大元公交·APP客服',m:'通义千问-Max',st:'run',q:11240,tokens:3.7,rate:88.9,up:'30 分钟前'},
-    phone:{a:'大元公交·语音客服',m:'通义千问-Max',st:'run',calls:2940,avgDur:109,rate:84.1,up:'30 分钟前'}},
+    app:{a:'大元公交·APP客服',m:'通义千问-Max',st:'run',q:11240,tokens:3.7,rate:88.9,up:'2026-07-01 10:00:00'},
+    phone:{a:'大元公交·语音客服',m:'通义千问-Max',st:'run',calls:2940,avgDur:109,rate:84.1,up:'2026-07-01 10:00:00'}},
   {n:'沧州公交',init:'沧',kb:18,
-    app:{a:'沧州公交·APP客服',m:'DeepSeek-V3',st:'off',q:0,tokens:0,rate:0,up:'3 天前'},
-    phone:{a:'沧州公交·语音客服',m:'DeepSeek-V3',st:'off',calls:0,avgDur:0,rate:0,up:'3 天前'}}
+    app:{a:'沧州公交·APP客服',m:'DeepSeek-V3',st:'off',q:0,tokens:0,rate:0,up:'2026-06-28 14:00:00'},
+    phone:{a:'沧州公交·语音客服',m:'DeepSeek-V3',st:'off',calls:0,avgDur:0,rate:0,up:'2026-06-28 14:00:00'}}
 ];
 const stMap = {run:['p-green','运行中','play'],debug:['p-orange','调试中','flask-conical'],off:['p-gray','已停用','pause']};
 let curAgentCh='app'; // 'app' | 'phone' — 客服智能体页当前查看渠道
 function fmtDur(sec){if(!sec)return'—';return `${Math.floor(sec/60)}'${String(sec%60).padStart(2,'0')}"`;}
 
 const kbTags = ['线路查询','票价政策','运营时刻','优惠卡办理','失物招领','投诉建议','乘车规则','实时公交','充电桩','定制公交'];
-/* ch: 该文档供哪些渠道的智能体检索使用 — app=APP智能客服中心，phone=AI电话客服系统 */
-const kbDocs = [
-  {n:'公交线路明细表（2026版）',type:'xls',tags:['线路查询','运营时刻'],ch:['app','phone'],st:'ok',hit:4820,chunk:312,by:'王明辉',up:'2026-06-22 14:30'},
-  {n:'城市公交票价及计费规则说明',type:'doc',tags:['票价政策'],ch:['app','phone'],st:'ok',hit:3960,chunk:88,by:'李晓燕',up:'2026-06-20 09:15'},
-  {n:'老年卡 / 学生卡办理流程指引',type:'pdf',tags:['优惠卡办理'],ch:['app','phone'],st:'ok',hit:2745,chunk:64,by:'陈志强',up:'2026-06-19 16:42'},
-  {n:'失物招领登记与认领须知',type:'doc',tags:['失物招领'],ch:['app','phone'],st:'ok',hit:1530,chunk:42,by:'刘思雨',up:'2026-06-18 11:08'},
-  {n:'2026夏季线路临时调整公告',type:'pdf',tags:['线路查询','运营时刻'],ch:['app','phone'],st:'parsing',hit:0,chunk:0,by:'王明辉',up:'2026-06-30 08:52'},
-  {n:'定制公交开通申请与定价办法',type:'doc',tags:['定制公交','票价政策'],ch:['app','phone'],st:'ok',hit:980,chunk:57,by:'赵建国',up:'2026-06-15 13:20'},
-  {n:'乘车文明规范与禁带物品清单',type:'pdf',tags:['乘车规则'],ch:['app','phone'],st:'ok',hit:1240,chunk:36,by:'陈志强',up:'2026-06-12 10:35'},
-  {n:'新能源充电桩站点分布表',type:'xls',tags:['充电桩'],ch:['app','phone'],st:'fail',hit:0,chunk:0,by:'李晓燕',up:'2026-06-11 17:00'},
-  {n:'投诉建议受理与回复时限规定',type:'doc',tags:['投诉建议'],ch:['app','phone'],st:'ok',hit:670,chunk:29,by:'刘思雨',up:'2026-06-09 14:55'},
-  {n:'实时公交小程序使用帮助',type:'md',tags:['实时公交'],ch:['app'],st:'draft',hit:0,chunk:0,by:'赵建国',up:'2026-06-08 15:30'},
-  {n:'语音热线常用应答话术库',type:'doc',tags:['乘车规则','投诉建议'],ch:['phone'],st:'ok',hit:2160,chunk:74,by:'王明辉',up:'2026-06-17 10:20'}
-];
 const kbStMap = {ok:['p-green','已发布'],parsing:['p-blue','解析中'],fail:['p-red','解析失败'],draft:['p-gray','草稿']};
-const fileIco = {xls:'file-spreadsheet',doc:'file-text',pdf:'file-text',md:'file-code'};
-const kbChLabel = {app:'APP 智能客服中心',phone:'AI 电话客服系统'};
-let curKbCh='all'; // 'all' | 'app' | 'phone' — 知识库页当前渠道筛选
+const fileBg   = {xls:'#E3FCEF',xlsx:'#E3FCEF',doc:'#E9F2FF',docx:'#E9F2FF',pdf:'#FFEDEC',txt:'#F1F2F4',md:'#F3F0FF'};
+const fileClr  = {xls:'#1F845A',xlsx:'#1F845A',doc:'#0C5BCE',docx:'#0C5BCE',pdf:'#C9372C',txt:'#44546F',md:'#5E4DB2'};
+const fileTName= {xls:'Excel',xlsx:'Excel',doc:'Word',docx:'Word',pdf:'PDF',txt:'TXT',md:'MD'};
+const _sw=p=>`<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+const fileSvg={
+  xls: _sw('<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M8 13h2"/><path d="M14 13h2"/><path d="M8 17h2"/><path d="M14 17h2"/>'),
+  doc: _sw('<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>'),
+  pdf: _sw('<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>'),
+  txt: _sw('<path d="M4 22h14a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v4"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M2 13v-1h6v1"/><path d="M5 12v6"/><path d="M4 18h2"/>'),
+  md:  _sw('<path d="M10 12.5 8 15l2 2.5"/><path d="m14 12.5 2 2.5-2 2.5"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/>'),
+};
+fileSvg.xlsx=fileSvg.xls;fileSvg.docx=fileSvg.doc;
+const kbAgents = [
+  {coIdx:0,co:'临沂公交',agentName:'临沂公交·智能客服',ch:['app','phone'],lastBy:'王明辉',lastUp:'2026-06-22 14:30',
+   docs:[
+     {n:'公交线路明细表（2026版）',type:'xls',sz:'3.2M',st:'ok',hit:4820,chunk:312,by:'王明辉',up:'2026-06-22 14:30'},
+     {n:'城市公交票价及计费规则说明',type:'doc',sz:'1.2M',st:'ok',hit:3960,chunk:88,by:'李晓燕',up:'2026-06-20 09:15'},
+     {n:'老年卡/学生卡办理流程指引',type:'pdf',sz:'4.6M',st:'ok',hit:2745,chunk:64,by:'陈志强',up:'2026-06-19 16:42'},
+     {n:'2026夏季线路临时调整公告',type:'pdf',sz:'820 KB',st:'parsing',hit:0,chunk:0,by:'王明辉',up:'2026-06-30 08:52'},
+     {n:'乘车文明规范与禁带物品清单',type:'pdf',sz:'1.5M',st:'ok',hit:1240,chunk:36,by:'陈志强',up:'2026-06-12 10:35'},
+   ]},
+  {coIdx:1,co:'哈尔滨公交',agentName:'哈尔滨公交·智能客服',ch:['app','phone'],lastBy:'赵建国',lastUp:'2026-06-29 10:15',
+   docs:[
+     {n:'公交线路明细表（2026版）',type:'xls',sz:'4.8M',st:'ok',hit:6120,chunk:428,by:'赵建国',up:'2026-06-29 10:15'},
+     {n:'城市公交票价及计费规则说明',type:'doc',sz:'1.2M',st:'ok',hit:4830,chunk:88,by:'赵建国',up:'2026-06-25 14:00'},
+     {n:'老年卡/学生卡办理流程指引',type:'pdf',sz:'4.6M',st:'ok',hit:3290,chunk:64,by:'刘思雨',up:'2026-06-23 09:30'},
+     {n:'失物招领登记与认领须知',type:'doc',sz:'910 KB',st:'ok',hit:1870,chunk:42,by:'刘思雨',up:'2026-06-21 16:45'},
+     {n:'语音热线常用应答话术库',type:'doc',sz:'2.1M',st:'ok',hit:2160,chunk:74,by:'赵建国',up:'2026-06-17 10:20'},
+     {n:'乘车文明规范与禁带物品清单',type:'pdf',sz:'1.5M',st:'ok',hit:1540,chunk:36,by:'刘思雨',up:'2026-06-12 10:35'},
+     {n:'定制公交开通申请与定价办法',type:'doc',sz:'1.4M',st:'ok',hit:980,chunk:57,by:'赵建国',up:'2026-06-15 13:20'},
+   ]},
+  {coIdx:2,co:'琴岛公交',agentName:'琴岛公交·智能客服',ch:['app','phone'],lastBy:'陈志强',lastUp:'2026-06-28 15:40',
+   docs:[
+     {n:'公交线路明细表（2026版）',type:'xls',sz:'2.9M',st:'ok',hit:5430,chunk:380,by:'陈志强',up:'2026-06-28 15:40'},
+     {n:'城市公交票价及计费规则说明',type:'doc',sz:'1.2M',st:'ok',hit:4020,chunk:88,by:'陈志强',up:'2026-06-26 11:00'},
+     {n:'老年卡/学生卡办理流程指引',type:'pdf',sz:'4.6M',st:'ok',hit:2980,chunk:64,by:'陈志强',up:'2026-06-22 09:00'},
+     {n:'失物招领登记与认领须知',type:'doc',sz:'910 KB',st:'ok',hit:1620,chunk:42,by:'王明辉',up:'2026-06-18 13:30'},
+   ]},
+  {coIdx:3,co:'大连公交',agentName:'大连公交·智能客服',ch:['app','phone'],lastBy:'李晓燕',lastUp:'2026-06-30 09:10',
+   docs:[
+     {n:'公交线路明细表（2026版）',type:'xls',sz:'5.4M',st:'ok',hit:7240,chunk:520,by:'李晓燕',up:'2026-06-30 09:10'},
+     {n:'城市公交票价及计费规则说明',type:'doc',sz:'1.2M',st:'ok',hit:5860,chunk:88,by:'李晓燕',up:'2026-06-28 14:30'},
+     {n:'老年卡/学生卡办理流程指引',type:'pdf',sz:'4.6M',st:'ok',hit:3740,chunk:64,by:'王明辉',up:'2026-06-27 10:00'},
+     {n:'失物招领登记与认领须知',type:'doc',sz:'910 KB',st:'ok',hit:2180,chunk:42,by:'刘思雨',up:'2026-06-25 15:20'},
+     {n:'2026夏季线路临时调整公告',type:'pdf',sz:'820 KB',st:'ok',hit:890,chunk:28,by:'李晓燕',up:'2026-06-24 08:30'},
+     {n:'实时公交小程序使用帮助',type:'md',sz:'86 KB',st:'ok',hit:640,chunk:24,by:'王明辉',up:'2026-06-20 16:00'},
+   ]},
+  {coIdx:4,co:'长春公交',agentName:'长春公交·智能客服',ch:['app','phone'],lastBy:'刘思雨',lastUp:'2026-06-27 11:30',
+   docs:[
+     {n:'公交线路明细表（2026版）',type:'xls',sz:'3.6M',st:'ok',hit:4960,chunk:346,by:'刘思雨',up:'2026-06-27 11:30'},
+     {n:'城市公交票价及计费规则说明',type:'doc',sz:'1.2M',st:'ok',hit:3840,chunk:88,by:'刘思雨',up:'2026-06-25 09:45'},
+     {n:'老年卡/学生卡办理流程指引',type:'pdf',sz:'4.6M',st:'ok',hit:2560,chunk:64,by:'陈志强',up:'2026-06-22 14:00'},
+     {n:'投诉建议受理与回复时限规定',type:'doc',sz:'640 KB',st:'ok',hit:780,chunk:29,by:'刘思雨',up:'2026-06-18 10:30'},
+     {n:'新能源充电桩站点分布表',type:'xls',sz:'3.2M',st:'fail',hit:0,chunk:0,by:'陈志强',up:'2026-06-11 17:00'},
+   ]},
+  {coIdx:5,co:'淄博公交',agentName:'淄博公交·智能客服',ch:['app','phone'],lastBy:'赵建国',lastUp:'2026-06-26 16:20',
+   docs:[
+     {n:'公交线路明细表（2026版）',type:'xls',sz:'2.1M',st:'ok',hit:2840,chunk:210,by:'赵建国',up:'2026-06-26 16:20'},
+     {n:'城市公交票价及计费规则说明',type:'doc',sz:'1.2M',st:'ok',hit:2190,chunk:88,by:'赵建国',up:'2026-06-24 10:00'},
+     {n:'乘车文明规范与禁带物品清单',type:'pdf',sz:'1.5M',st:'ok',hit:860,chunk:36,by:'赵建国',up:'2026-06-20 14:30'},
+   ]},
+  {coIdx:6,co:'淮安公交',agentName:'淮安公交·智能客服',ch:['app','phone'],lastBy:'王明辉',lastUp:'2026-06-25 14:50',
+   docs:[
+     {n:'公交线路明细表（2026版）',type:'xls',sz:'2.7M',st:'ok',hit:3680,chunk:258,by:'王明辉',up:'2026-06-25 14:50'},
+     {n:'城市公交票价及计费规则说明',type:'doc',sz:'1.2M',st:'ok',hit:2840,chunk:88,by:'王明辉',up:'2026-06-23 09:30'},
+     {n:'老年卡/学生卡办理流程指引',type:'pdf',sz:'4.6M',st:'ok',hit:1920,chunk:64,by:'李晓燕',up:'2026-06-20 11:45'},
+     {n:'投诉建议受理与回复时限规定',type:'doc',sz:'640 KB',st:'ok',hit:560,chunk:29,by:'王明辉',up:'2026-06-16 15:00'},
+   ]},
+  {coIdx:7,co:'大元公交',agentName:'大元公交·智能客服',ch:['app','phone'],lastBy:'陈志强',lastUp:'2026-06-24 09:30',
+   docs:[
+     {n:'公交线路明细表（2026版）',type:'xls',sz:'2.2M',st:'ok',hit:2960,chunk:218,by:'陈志强',up:'2026-06-24 09:30'},
+     {n:'城市公交票价及计费规则说明',type:'doc',sz:'1.2M',st:'ok',hit:2280,chunk:88,by:'陈志强',up:'2026-06-22 14:00'},
+     {n:'老年卡/学生卡办理流程指引',type:'pdf',sz:'4.6M',st:'draft',hit:0,chunk:0,by:'李晓燕',up:'2026-06-21 10:00'},
+   ]},
+  {coIdx:8,co:'沧州公交',agentName:'沧州公交·智能客服',ch:['app','phone'],lastBy:'刘思雨',lastUp:'2026-06-10 14:20',
+   docs:[
+     {n:'公交线路明细表（2026版）',type:'xls',sz:'1.8M',st:'ok',hit:1240,chunk:98,by:'刘思雨',up:'2026-06-10 14:20'},
+     {n:'城市公交票价及计费规则说明',type:'doc',sz:'1.2M',st:'ok',hit:980,chunk:88,by:'刘思雨',up:'2026-06-09 10:30'},
+   ]}
+];
+let curKbCh='all';
 
 const issues = [
   {q:'公交卡里的余额可以退到微信吗？怎么操作？',co:'大连公交',init:'连',cat:'优惠卡办理',ch:'app',cnt:148,last:'2 小时前',st:'open',
@@ -780,17 +826,17 @@ function renderKpis(){
 function renderDashIssues(){
   $('#dashIssues').innerHTML=issues.slice(0,5).map(it=>`
     <div class="lrow row-link" onclick="openIssue('${it.q.replace(/'/g,'')}')">
-      <span class="pill p-red"><span class="pdot" style="background:#E53E3E"></span>${it.cat}</span>
+      <span class="pill p-red"><span class="pdot" style="background:var(--red)"></span>${it.cat}</span>
       <div class="qn"><b>${it.q}</b><span>${it.co}</span></div>
-      <span class="cnt" style="color:#E53E3E">${it.cnt}<small style="color:#C53030;font-weight:400;font-size:11px"> 次</small></span>
+      <span class="cnt" style="color:var(--red)">${it.cnt}<small style="color:var(--red);font-weight:400;font-size:11px;opacity:.7"> 次</small></span>
     </div>`).join('');
 }
 
 /* ---------------- AGENTS ---------------- */
 function renderAgentThead(){
   $('#agentThead').innerHTML = curAgentCh==='app'
-    ? `<th>公司</th><th>智能体</th><th>状态</th><th>模型</th><th>知识库</th><th class="right">累积问答</th><th class="right">Token 消耗</th><th>解决率</th><th>更新时间</th>`
-    : `<th>公司</th><th>智能体</th><th>状态</th><th>模型</th><th>知识库</th><th class="right">累积通话</th><th class="right">平均通话时长</th><th>解决率</th><th>更新时间</th>`;
+    ? `<th style="width:18%">公司</th><th style="width:24%">智能体名称</th><th style="width:100px">知识库</th><th class="right" style="width:100px">累积问答</th><th class="right" style="width:100px">Token 消耗</th><th style="width:90px">解决率</th><th style="width:155px;white-space:nowrap">最近更新时间</th>`
+    : `<th style="width:18%">公司</th><th style="width:24%">智能体名称</th><th style="width:100px">知识库</th><th class="right" style="width:100px">累积通话</th><th class="right" style="width:120px">平均通话时长</th><th style="width:90px">解决率</th><th style="width:155px;white-space:nowrap">最近更新时间</th>`;
 }
 function setAgentCh(ch){
   curAgentCh=ch;
@@ -800,52 +846,142 @@ function setAgentCh(ch){
 function renderAgents(){
   renderAgentThead();
   $('#agentRows').innerHTML=companies.map((c,i)=>{
-    const d=c[curAgentCh],s=stMap[d.st];
+    const d=c[curAgentCh];
     const metricCell = curAgentCh==='app'
       ? `<td class="right num cell-main">${d.q?fmt(d.q):'—'}</td><td class="right num cell-main">${d.tokens?d.tokens.toFixed(1)+' M':'—'}</td>`
       : `<td class="right num cell-main">${d.calls?fmt(d.calls):'—'}</td><td class="right num cell-main">${fmtDur(d.avgDur)}</td>`;
     return `<tr class="row-link" onclick="openAgent(${i})">
-      <td><div class="cell-main">${c.n}</div></td>
-      <td><div class="cell-sub" style="color:var(--ink)">${d.a}</div></td>
-      <td><span class="pill ${s[0]}"><span class="pdot" style="background:currentColor"></span>${s[1]}</span></td>
-      <td><span class="tag">${d.m}</span></td>
-      <td class="num">${c.kb} 个文档</td>
+      <td style="overflow:hidden"><div class="cell-main">${c.n}</div></td>
+      <td style="overflow:hidden"><div class="cell-main" style="font-weight:500;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${d.a}</div></td>
+      <td class="num" style="color:var(--ink-3)">${c.kb}<span style="font-size:12px;margin-left:2px;color:var(--ink-4)">份</span></td>
       ${metricCell}
-      <td>${d.rate?`<div class="meter"><div class="track"><i style="width:${d.rate}%;background:${d.rate>92?'var(--green)':d.rate>89?'var(--blue)':'var(--orange)'}"></i></div><span class="num" style="font-weight:600">${d.rate}%</span></div>`:'<span style="color:var(--ink-4)">—</span>'}</td>
-      <td style="color:var(--ink-3)">${d.up}</td>
+      <td><span class="num" style="font-weight:700;color:${d.rate>92?'var(--green)':d.rate>89?'var(--ink)':'var(--orange)'}">${d.rate?d.rate+'%':'—'}</span></td>
+      <td style="color:var(--ink-4);font-size:12.5px;white-space:nowrap">${d.up}</td>
     </tr>`;
   }).join('');
 }
 
 /* ---------------- KB ---------------- */
-function setKbCh(ch){
-  curKbCh=ch;
-  document.querySelectorAll('#kbChTab button').forEach(b=>b.classList.toggle('on',b.dataset.ch===ch));
-  renderKb();icons();
-}
 function renderKb(){
-  const list = curKbCh==='all' ? kbDocs : kbDocs.filter(d=>d.ch.includes(curKbCh));
-  $('#kbRows').innerHTML=list.map(d=>{
-    const s=kbStMap[d.st];
-    return `<tr class="row-link">
-      <td style="padding:12px 10px"><div class="co">
-        <div class="co-logo" style="background:#EBECF0;color:var(--ink-3);width:28px;height:28px;border-radius:6px;flex:0 0 28px"><i data-lucide="${fileIco[d.type]}" style="width:14px;height:14px"></i></div>
-        <div class="cell-main" style="font-size:13px">${d.n}</div>
-      </div></td>
-      <td style="padding:12px 8px"><div class="tags">${d.tags.map(t=>`<span class="tag" style="font-size:11.5px;padding:2px 7px">${t}</span>`).join('')}</div></td>
-      <td style="padding:12px 8px"><div class="tags">${d.ch.map(c=>`<span class="tag" style="font-size:11.5px;padding:2px 7px;background:${c==='app'?'var(--blue-soft)':'var(--purple-bg)'};border-color:transparent;color:${c==='app'?'var(--blue)':'var(--purple)'}">${kbChLabel[c]}</span>`).join('')}</div></td>
-      <td style="padding:12px 8px"><span class="pill ${s[0]}" style="font-size:12px;padding:3px 9px"><span class="pdot" style="background:currentColor"></span>${s[1]}</span></td>
-      <td class="right num cell-main" style="padding:12px 8px">${d.hit?fmt(d.hit):'—'}</td>
-      <td class="num" style="padding:12px 8px;color:var(--ink-3)">${d.chunk||'—'}</td>
-      <td style="padding:12px 8px;color:var(--ink-2);font-size:13px">${d.by}</td>
-      <td style="padding:12px 8px;color:var(--ink-3);font-size:12.5px;white-space:nowrap">${d.up}</td>
+  $('#kbRows').innerHTML=kbAgents.map((a,i)=>{
+    const c=companies[a.coIdx];
+    return `<tr class="row-link" onclick="openKbAgent(${i})">
+      <td style="overflow:hidden"><div class="cell-main" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${a.agentName}</div></td>
+      <td style="color:var(--ink-2)">${a.co}</td>
+      <td><div class="tags">${a.ch.map(ch=>`<span class="tag" style="font-size:11.5px;padding:2px 7px;background:${ch==='app'?'var(--blue-soft)':'var(--purple-bg)'};border-color:transparent;color:${ch==='app'?'var(--blue)':'var(--purple)'}">${ch==='app'?'APP 客服':'电话客服'}</span>`).join('')}</div></td>
+      <td class="num"><span style="font-weight:700;color:var(--ink)">${a.docs.length}</span><span style="font-size:12px;color:var(--ink-4);margin-left:2px">份</span></td>
+      <td style="color:var(--ink-3);font-size:13px">${a.lastBy}</td>
+      <td style="color:var(--ink-4);font-size:12.5px;white-space:nowrap">${a.lastUp}</td>
+      <td style="text-align:center"><span class="link" style="font-size:12.5px;pointer-events:none">查看文档<i data-lucide="chevron-right" style="width:12px;height:12px"></i></span></td>
     </tr>`;
   }).join('');
-  const foot=$('#kbFootCount'); if(foot)foot.textContent=`共 ${list.length} 个文档`;
+}
+function renderDocRows(agentIdx){
+  const a=kbAgents[agentIdx];
+  if(!a.docs.length) return `<tr><td colspan="4" style="text-align:center;padding:30px;color:var(--ink-4)">暂无文档，请上传</td></tr>`;
+  return a.docs.map((d,di)=>{
+    const t=d.type||'doc';
+    const bg=fileBg[t]||'#EBECF0';
+    const clr=fileClr[t]||'#44546F';
+    const tname=fileTName[t]||t.toUpperCase();
+    const svg=fileSvg[t]||fileSvg.doc;
+    return `<tr style="border-bottom:1px solid var(--line-2)">
+      <td style="padding:12px 16px"><div class="co" style="gap:9px;align-items:flex-start">
+        <div style="background:${bg};color:${clr};width:28px;height:28px;border-radius:6px;flex:0 0 28px;display:flex;align-items:center;justify-content:center;margin-top:1px">${svg}</div>
+        <div style="min-width:0;flex:1">
+          <div class="cell-main" style="font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${d.n}</div>
+          <div style="display:flex;align-items:center;gap:6px;margin-top:3px">
+            <span style="font-size:11px;font-weight:600;color:${clr};background:${bg};padding:1px 6px;border-radius:3px">${tname}</span>
+            <span style="font-size:11.5px;color:var(--ink-4)">${d.sz||'—'}</span>
+          </div>
+        </div>
+      </div></td>
+      <td style="padding:12px 12px 12px 6px;color:var(--ink-3);font-size:13px;white-space:nowrap">${d.by}</td>
+      <td style="padding:12px 12px;color:var(--ink-3);font-size:12px;white-space:nowrap">${d.up}</td>
+      <td style="padding:12px 16px 12px 4px;text-align:center">
+        <button class="icon-btn" style="color:var(--red)" title="删除文档" onclick="deleteKbDoc(${agentIdx},${di})"><i data-lucide="trash-2" style="width:14px;height:14px"></i></button>
+      </td>
+    </tr>`;
+  }).join('');
+}
+function openKbAgent(idx){
+  const a=kbAgents[idx],c=companies[a.coIdx];
+  openDrawer(`
+    <div class="dr-head">
+      <div class="co-logo" style="width:46px;height:46px;font-size:18px;background:${coColor[a.coIdx]}">${c.init}</div>
+      <div style="flex:1">
+        <div style="font-size:17px;font-weight:700">${a.agentName}</div>
+        <div style="color:var(--ink-3);font-size:13px;margin-top:2px">${a.co} · APP 智能客服中心 / AI 电话客服系统</div>
+      </div>
+      <button class="icon-btn x" onclick="closeDrawer()"><i data-lucide="x"></i></button>
+    </div>
+    <div style="padding:12px 18px;display:flex;gap:8px;border-bottom:1px solid var(--line);background:var(--white);flex-shrink:0">
+      <div class="search" style="flex:1;height:32px"><i data-lucide="search"></i><input placeholder="搜索文档名称…"></div>
+      <button class="btn primary" style="height:32px;font-size:12.5px;white-space:nowrap" onclick="openUploadForAgent(${idx})"><i data-lucide="upload"></i>上传知识库</button>
+    </div>
+    <div class="dr-body" style="padding:0;overflow-y:auto">
+      <table style="width:100%;border-collapse:collapse;table-layout:fixed">
+        <thead style="position:sticky;top:0;z-index:1"><tr style="background:var(--canvas)">
+          <th style="padding:10px 16px;text-align:left;font-size:12.5px;font-weight:500;color:var(--ink-4);border-bottom:1px solid var(--line)">文档名称</th>
+          <th style="width:72px;padding:10px 12px 10px 6px;text-align:left;font-size:12.5px;font-weight:500;color:var(--ink-4);border-bottom:1px solid var(--line);white-space:nowrap">上传人</th>
+          <th style="width:136px;padding:10px 12px;text-align:left;font-size:12.5px;font-weight:500;color:var(--ink-4);border-bottom:1px solid var(--line);white-space:nowrap">更新时间</th>
+          <th style="width:56px;border-bottom:1px solid var(--line)"></th>
+        </tr></thead>
+        <tbody id="kbDocRows_${idx}">${renderDocRows(idx)}</tbody>
+      </table>
+    </div>
+    `);
+}
+let _delAgentIdx=null,_delDocIdx=null;
+function deleteKbDoc(agentIdx,docIdx){
+  _delAgentIdx=agentIdx;_delDocIdx=docIdx;
+  const doc=kbAgents[agentIdx].docs[docIdx];
+  $('#deleteDocName').textContent=doc.n;
+  $('#deleteDocModal').classList.add('show');
+  icons();
+}
+function closeDeleteDocModal(){
+  $('#deleteDocModal').classList.remove('show');
+  _delAgentIdx=null;_delDocIdx=null;
+}
+function confirmDeleteDoc(){
+  if(_delAgentIdx===null)return;
+  kbAgents[_delAgentIdx].docs.splice(_delDocIdx,1);
+  const tbody=document.getElementById('kbDocRows_'+_delAgentIdx);
+  if(tbody){tbody.innerHTML=renderDocRows(_delAgentIdx);icons();}
+  renderKb();
+  closeDeleteDocModal();
+}
+function openUploadForAgent(agentIdx){
+  const a=kbAgents[agentIdx];
+  renderTagPick();
+  const inp=document.getElementById('agentSelectInp');if(inp)inp.value=a.agentName;
+  $('#uploadModal').classList.add('show');icons();
 }
 
 /* ---------------- ANALYTICS ---------------- */
 let curAnaCh='all'; // 'all' | 'app' | 'phone' — 使用分析页当前渠道
+let curAnaTrend='primary'; // 'primary' | 'secondary'
+function setAnaTrend(t,btn){
+  if(!anaChartInstances.trend)return;
+  curAnaTrend=t;
+  $('#anaTrendTab').querySelectorAll('button').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  const isPhone=window._anaPhone;
+  $('#anaTrendTitle').textContent=(t==='primary'?(isPhone?'通话量':'问答量'):(isPhone?'通话时长':'Token'))+'趋势';
+  const c=anaChartInstances.trend;
+  c.data.datasets[0].hidden=(t!=='primary');
+  c.data.datasets[1].hidden=(t!=='secondary');
+  c.options.scales.y.display=(t==='primary');
+  c.options.scales.y1.display=(t==='secondary');
+  c.update();
+}
+function pickAnaCo(name,el){
+  document.getElementById('anaCoLbl').textContent=name||'全部公司';
+  document.getElementById('anaCoDd').querySelectorAll('.dd-item').forEach(d=>d.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById('anaCoBtn').classList.remove('open');
+}
 const anaKpiSets={
   all:[
     {ico:'messages-square',l:'总问答 / 通话数',v:'194,320',d:1,dv:'+11.6%'},
@@ -897,11 +1033,11 @@ function renderTopQ(){
   const max=topQ[0][1];
   $('#topQ').innerHTML=topQ.map((q,i)=>`
     <div class="lrow">
-      <span class="num" style="width:22px;font-weight:700;color:var(--ink-4);font-size:13px">${(i+1).toString().padStart(2,'0')}</span>
-      <div class="qn"><b>${q[0]}</b>
-        <div class="mbar"><i style="width:${q[1]/max*100}%"></i></div>
+      <span class="num" style="width:22px;font-weight:700;color:${i<3?'var(--blue)':'var(--ink-4)'};font-size:13px">${(i+1).toString().padStart(2,'0')}</span>
+      <div class="qn"><b style="color:var(--ink)">${q[0]}</b>
+        <div class="mbar" style="margin-top:6px"><i style="width:${q[1]/max*100}%"></i></div>
       </div>
-      <div style="text-align:right"><div class="cnt num">${fmt(q[1])}</div><span class="tag" style="font-size:11px;margin-top:3px">${q[2]}</span></div>
+      <div style="text-align:right"><div class="cnt num" style="font-size:13.5px">${fmt(q[1])}</div><span class="tag" style="font-size:11px;margin-top:4px;display:inline-block">${q[2]}</span></div>
     </div>`).join('');
 }
 
@@ -936,17 +1072,17 @@ function renderIssues(){
   $('#issueRows').innerHTML=list.map((it)=>{
     const i=issues.indexOf(it);
     const s=issueStMap[it.st];
+    const coIdx=companies.findIndex(c=>c.n===it.co);
     return `<tr class="row-link" onclick="openIssueIdx(${i})">
-      <td><div class="cell-main">${it.q}</div><div class="cell-sub">已归并 ${it.sim.length+1} 类相似提问</div></td>
-      <td><span style="font-size:12.5px">${it.co}</span></td>
-      <td><span class="tag">${it.cat}</span></td>
-      <td><span class="tag" style="background:${it.ch==='app'?'var(--blue-soft)':'var(--purple-bg)'};border-color:transparent;color:${it.ch==='app'?'var(--blue)':'var(--purple)'}">${issueChLabel[it.ch]}</span></td>
-      <td class="right num cell-main" style="font-size:15px">${it.cnt}</td>
-      <td style="color:var(--ink-3)">${it.last}</td>
-      <td><span class="pill ${s[0]}"><span class="pdot" style="background:currentColor"></span>${s[1]}</span></td>
+      <td><div style="font-weight:600;color:var(--ink);font-size:13.5px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${it.q}</div><div class="cell-sub" style="margin-top:4px">已归并 ${it.sim.length+1} 类相似提问</div></td>
+      <td><span style="font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block">${it.co}</span></td>
+      <td><span class="tag" style="font-size:12px">${it.cat}</span></td>
+      <td><span class="pill ${it.ch==='app'?'p-blue':'p-purple'}" style="font-size:12px;padding:3px 9px">${it.ch==='app'?'APP':'电话'}</span></td>
+      <td class="right num" style="font-weight:700;color:var(--ink)">${it.cnt}</td>
+      <td style="color:var(--ink-4);font-size:13px;white-space:nowrap">${it.last}</td>
+      <td><span class="pill ${s[0]}" style="font-size:12px;padding:3px 9px"><span class="pdot" style="background:currentColor"></span>${s[1]}</span></td>
     </tr>`;
   }).join('');
-  const foot=$('#issueFootCount'); if(foot)foot.textContent=`待处理 · 共 ${list.length} 个未命中意图`;
 }
 
 /* ---------------- OPT LIST ---------------- */
@@ -970,7 +1106,7 @@ function genOptList(){
     {rank:4,pri:'mid',cat:'失物招领',co:'大连公交',cnt:43,
      title:'补全各车队招领点联系方式',
      gap:'失物招领须知已上传，但缺少「按线路/车队」对应的具体招领地点、电话及受理时间，用户无法落地操作。',
-     action:'1. 整理各车队失物招领点地址、电话、受理时间，制成对照表上传。\n2. 在原失物须知中增加「联系方式速查」章节并更新。',
+     action:'1. 线下整理各车队失物招领点地址、电话、受理时间，制成对照表并更新至原失物须知文档中。\n2. 在系统知识库中删除原有失物须知文档，将更新后的完整文档重新上传并打标签。',
      est:43,tag:'知识库更新'},
     {rank:5,pri:'low',cat:'优惠政策',co:'淮安公交',cnt:31,
      title:'补充特殊群体乘车优待政策',
@@ -981,12 +1117,11 @@ function genOptList(){
   const priLabel={high:['#C9372C','高优先'],mid:['#974F0C','中优先'],low:['#1F845A','低优先']};
   const totalEst=optItems.reduce((s,i)=>s+i.est,0);
   const html=`
-<div style="display:flex;flex-direction:column;height:100vh">
   <div style="padding:24px 24px 18px;border-bottom:1px solid var(--color-border);flex-shrink:0">
     <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
       <div>
         <div style="font-size:11px;font-weight:600;color:var(--color-brand);letter-spacing:.6px;text-transform:uppercase;margin-bottom:6px">AI 生成 · 2026-07-01</div>
-        <h2 style="font-size:18px;font-weight:700;color:var(--ink);margin:0 0 4px">本周知识库优化清单</h2>
+        <h2 style="font-size:18px;font-weight:700;color:var(--ink);margin:0 0 4px">知识库优化清单</h2>
         <div style="font-size:13px;color:var(--ink-3)">基于 47 条未命中意图聚类分析，共识别 5 项优化方向</div>
       </div>
       <button class="icon-btn x" onclick="closeDrawer()" style="flex-shrink:0;margin-top:2px"><i data-lucide="x"></i></button>
@@ -1000,21 +1135,21 @@ function genOptList(){
         <div style="font-size:11px;color:var(--ink-3);margin-bottom:4px">可优化 KB 项</div>
         <div class="num" style="font-size:22px;font-weight:700;color:var(--ink)">5</div>
       </div>
-      <div style="background:#EEF4FF;border:1px solid #C5D8FF;border-radius:10px;padding:12px 14px;text-align:center">
-        <div style="font-size:11px;color:var(--color-brand);margin-bottom:4px">预计可拦截</div>
-        <div class="num" style="font-size:22px;font-weight:700;color:var(--color-brand)">${totalEst}</div>
+      <div style="background:var(--canvas);border:1px solid var(--color-border);border-radius:10px;padding:12px 14px;text-align:center">
+        <div style="font-size:11px;color:var(--ink-3);margin-bottom:4px">预计可拦截</div>
+        <div class="num" style="font-size:22px;font-weight:700;color:var(--ink)">${totalEst}</div>
       </div>
     </div>
   </div>
-  <div style="flex:1;overflow-y:auto;padding:20px 24px;display:flex;flex-direction:column;gap:14px">
+  <div style="flex:1;min-height:0;overflow-y:auto;padding:20px 24px">
     ${optItems.map(it=>{
       const [priColor,priText]=priLabel[it.pri];
-      return `<div style="border:1px solid var(--color-border);border-radius:12px;overflow:hidden">
+      return `<div style="border:1px solid var(--color-border);border-radius:12px;overflow:hidden;margin-bottom:14px">
         <div style="padding:14px 16px 12px;background:var(--white)">
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
             <span style="font-size:11px;font-weight:700;background:${priColor}20;color:${priColor};border-radius:6px;padding:2px 8px">${priText}</span>
-            <span style="font-size:11px;color:var(--ink-3)">${it.tag}</span>
-            <span style="margin-left:auto;font-size:11px;color:var(--ink-4)">涉及 ${it.co} · ${it.cat}</span>
+            <span style="font-size:12px;color:var(--ink-2)">${it.tag}</span>
+            <span style="margin-left:auto;font-size:12px;color:var(--ink-2)">涉及 ${it.co} · ${it.cat}</span>
           </div>
           <div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:8px">No.${it.rank} &nbsp;${it.title}</div>
           <div style="font-size:12.5px;color:var(--ink-3);line-height:1.6;padding:10px 12px;background:var(--canvas);border-radius:8px;margin-bottom:10px">
@@ -1022,27 +1157,23 @@ function genOptList(){
           </div>
           <div style="font-size:12.5px;color:var(--ink-2);line-height:1.8;white-space:pre-wrap">${it.action}</div>
         </div>
-        <div style="padding:10px 16px;background:var(--canvas);border-top:1px solid var(--color-border);display:flex;align-items:center;justify-content:space-between">
+        <div style="padding:10px 16px;background:var(--canvas);border-top:1px solid var(--color-border)">
           <span style="font-size:12px;color:var(--ink-3)">补充后预计可拦截 <b class="num" style="color:var(--ink)">${it.est}</b> 条同类提问</span>
-          <button class="btn" style="height:28px;font-size:12px;padding:0 12px" onclick="go('kb');closeDrawer()"><i data-lucide="arrow-right"></i>去知识库处理</button>
         </div>
       </div>`;
     }).join('')}
-    <div style="padding:16px;background:var(--canvas);border:1px dashed var(--color-border);border-radius:12px;font-size:12.5px;color:var(--ink-3);line-height:1.7">
-      <b style="color:var(--ink-2)">建议工作流：</b>将上述优化项导出为工单 → 分发至各公司知识库编辑 → 编辑完成后提交平台审核 → 审核通过后自动生效并观察次周未命中率变化。
-    </div>
   </div>
   <div style="padding:16px 24px;border-top:1px solid var(--color-border);display:flex;gap:10px;flex-shrink:0">
-    <button class="btn" style="flex:1" onclick="closeDrawer()">关闭</button>
-    <button class="btn primary" style="flex:2"><i data-lucide="download"></i>导出优化清单 PDF</button>
+    <button class="btn" style="flex:1;justify-content:center" onclick="go('kb');closeDrawer()">去知识库处理</button>
+    <button class="btn primary" style="flex:1;justify-content:center"><i data-lucide="download"></i>导出优化清单 PDF</button>
   </div>
-</div>`;
+  `;
   openDrawer(html);
 }
 
 /* ---------------- DRAWER ---------------- */
-function openDrawer(html){$('#drawerInner').innerHTML=html;$('#scrim').classList.add('show');$('#drawer').classList.add('show');icons();}
-function closeDrawer(){$('#scrim').classList.remove('show');$('#drawer').classList.remove('show');}
+function openDrawer(html){$('#drawerInner').innerHTML=html;$('#drawer').classList.add('show');icons();}
+function closeDrawer(){$('#drawer').classList.remove('show');}
 
 function openAgent(i,ch){
   ch=ch||curAgentCh;
@@ -1124,8 +1255,68 @@ function openIssueIdx(i){openDrawer(buildIssueDrawer(issues[i]));}
 function openIssue(q){const it=issues.find(x=>x.q.replace(/'/g,'')===q)||issues[0];openDrawer(buildIssueDrawer(it));}
 
 /* ---------------- UPLOAD MODAL ---------------- */
+/* ---------------- AGENT SELECT COMBOBOX ---------------- */
+function showAgentOpts(){filterAgentOpts(document.getElementById('agentSelectInp').value);}
+function hideAgentOpts(){setTimeout(()=>{const d=document.getElementById('agentOptsDd');if(d)d.style.display='none';},160);}
+function filterAgentOpts(q){
+  const dd=document.getElementById('agentOptsDd');if(!dd)return;
+  const kw=q.trim().toLowerCase();
+  const list=kw?kbAgents.filter(a=>a.agentName.toLowerCase().includes(kw)||a.co.toLowerCase().includes(kw)):kbAgents;
+  dd.innerHTML=list.length
+    ?list.map(a=>`<div class="dd-item" onmousedown="selectAgentOpt('${a.agentName}')" style="display:flex;align-items:center;gap:9px;padding:8px 13px">
+        <div class="co-logo" style="width:24px;height:24px;font-size:9px;border-radius:5px;flex:0 0 24px;background:${coColor[a.coIdx]}">${companies[a.coIdx].init}</div>
+        <div><div style="font-size:13px">${a.agentName}</div><div style="font-size:11.5px;color:var(--ink-4)">${a.co}</div></div>
+      </div>`).join('')
+    :`<div style="padding:12px 14px;color:var(--ink-4);font-size:13px">没有匹配的智能体</div>`;
+  dd.style.display='block';
+}
+function selectAgentOpt(name){
+  const inp=document.getElementById('agentSelectInp');if(inp)inp.value=name;
+  const dd=document.getElementById('agentOptsDd');if(dd)dd.style.display='none';
+}
+function openNewAgent(){
+  document.getElementById('newAgentCo').value='';
+  document.getElementById('newAgentName').value='';
+  $('#newAgentModal').classList.add('show');icons();
+}
+function closeNewAgent(){$('#newAgentModal').classList.remove('show');}
+function submitNewAgent(){
+  const co=document.getElementById('newAgentCo').value.trim();
+  const name=document.getElementById('newAgentName').value.trim();
+  if(!co||!name){alert('请填写所属公司和智能体名称');return;}
+  const now=new Date();
+  const ts=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0')+' '+String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0')+':'+String(now.getSeconds()).padStart(2,'0');
+  companies.push({n:co,init:co[0],kb:0,
+    app:{a:name,m:'DeepSeek-V3',st:'off',q:0,tokens:0,rate:0,up:ts},
+    phone:{a:name,m:'DeepSeek-V3',st:'off',calls:0,avgDur:0,rate:0,up:ts}});
+  closeNewAgent();renderAgents();icons();
+}
+
+function renderTagPick(){
+  $('#tagPick').innerHTML=kbTags.map((t,i)=>`<button class="chip ${i<2?'on':''}" onclick="this.classList.toggle('on')">${t}</button>`).join('')
+    +`<button class="chip" id="tagNewBtn" onclick="startTagCreate()" style="border-style:dashed;color:var(--blue);border-color:var(--blue);display:inline-flex;align-items:center;gap:3px"><svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>创建标签</button>`;
+}
+function startTagCreate(){
+  const btn=document.getElementById('tagNewBtn');if(!btn)return;
+  btn.outerHTML=`<span id="tagInputWrap" style="display:inline-flex;align-items:center;gap:3px;background:var(--blue-soft);border:1px solid var(--blue);border-radius:20px;padding:2px 4px 2px 10px">
+    <input id="tagNameInp" placeholder="标签名…" maxlength="8" style="border:none;outline:none;background:transparent;font-size:12.5px;width:72px;color:var(--ink)"
+      onkeydown="if(event.key==='Enter')saveTag();if(event.key==='Escape')renderTagPick()">
+    <button onclick="saveTag()" style="background:var(--blue);color:#fff;border:none;border-radius:14px;padding:2px 9px;font-size:12px;cursor:pointer;white-space:nowrap;line-height:1.6">保存</button>
+    <button onclick="renderTagPick()" style="background:none;border:none;color:var(--ink-4);cursor:pointer;padding:2px 6px;font-size:15px;line-height:1">×</button>
+  </span>`;
+  setTimeout(()=>{const i=document.getElementById('tagNameInp');if(i)i.focus();},10);
+}
+function saveTag(){
+  const inp=document.getElementById('tagNameInp');if(!inp)return;
+  const name=inp.value.trim();if(!name){inp.focus();return;}
+  if(!kbTags.includes(name))kbTags.push(name);
+  renderTagPick();
+  const newChip=[...$('#tagPick').querySelectorAll('.chip')].find(c=>c.textContent===name);
+  if(newChip)newChip.classList.add('on');
+}
 function openUpload(){
-  $('#tagPick').innerHTML=kbTags.map((t,i)=>`<button class="chip ${i<2?'on':''}" onclick="this.classList.toggle('on')">${t}</button>`).join('');
+  renderTagPick();
+  const inp=document.getElementById('agentSelectInp');if(inp)inp.value='';
   $('#uploadModal').classList.add('show');icons();
 }
 function closeUpload(){$('#uploadModal').classList.remove('show');}
@@ -1189,19 +1380,25 @@ function drawAnaCharts(force){
   const isPhone=ch==='phone';
   const days=Array.from({length:30},(_,i)=>`${i+1}`);
 
-  /* ---- panel 1: 问答/通话量 + Token / 平均时长 双轴趋势 ---- */
-  $('#anaTrendTitle').textContent = isPhone ? '通话量与平均通话时长' : '问答量与 Token 消耗';
+  /* ---- panel 1: 问答/通话量 + Token / 平均时长 趋势（seg 切换）---- */
+  const primLabel=isPhone?'通话量':'问答量', secLabel=isPhone?'通话时长':'Token';
+  $('#anaTrendTitle').textContent=primLabel+'趋势';
+  const primBtn=$('#anaTrendPrimBtn'),secBtn=$('#anaTrendSecBtn');
+  if(primBtn){primBtn.textContent=primLabel;primBtn.classList.add('on');}
+  if(secBtn){secBtn.textContent=secLabel;secBtn.classList.remove('on');}
+  curAnaTrend='primary';
   const primary=days.map((_,i)=>(isPhone?900:4200)+Math.round((isPhone?260:1100)*Math.sin(i/4)+Math.random()*(isPhone?180:500)));
   const secondary=isPhone
     ? primary.map(()=>80+Math.round(Math.random()*40))
     : primary.map(v=>Math.round(v*250+Math.random()*40000));
+  window._anaPri=primary;window._anaSec=secondary;window._anaPhone=isPhone;
   anaChartInstances.trend=new Chart($('#anaTrend'),{data:{labels:days,datasets:[
-    {type:'bar',label:isPhone?'通话数':'问答数',data:primary,backgroundColor:isPhone?'#E4D9F7':'#C1D4F0',borderRadius:4,yAxisID:'y',barThickness:9},
-    {type:'line',label:isPhone?'平均时长(s)':'Token',data:secondary,borderColor:isPhone?'#5E4DB2':'#6554C0',borderWidth:2,tension:.4,pointRadius:0,yAxisID:'y1'}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'top',align:'end',labels:{boxWidth:10,boxHeight:10,font:{size:11.5},color:'#5E6C84',usePointStyle:true}},tooltip:{backgroundColor:'#172B4D',padding:10,cornerRadius:8}},
+    {type:'bar',label:primLabel,data:primary,backgroundColor:isPhone?'#E4D9F7':'#C1D4F0',borderRadius:4,yAxisID:'y',barThickness:9},
+    {type:'line',label:secLabel,data:secondary,hidden:true,borderColor:isPhone?'#5E4DB2':'#6554C0',borderWidth:2,tension:.4,pointRadius:0,yAxisID:'y1'}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#172B4D',padding:10,cornerRadius:8}},
     scales:{x:{grid:{display:false},ticks:{color:'#8993A4',font:{size:10}},border:{display:false}},
     y:{grid:{color:'#EDEFF2'},ticks:{color:'#8993A4',font:{size:10}},border:{display:false}},
-    y1:{position:'right',grid:{display:false},ticks:{color:'#8993A4',font:{size:10},callback:v=>isPhone?v+'s':v/1e6+'M'},border:{display:false}}}}});
+    y1:{display:false,position:'right',grid:{display:false},ticks:{color:'#8993A4',font:{size:10},callback:v=>isPhone?v+'s':v>=1e6?(v/1e6).toFixed(1)+'M':v},border:{display:false}}}}});
 
   /* ---- panel 2: 各时段咨询/来电热度 ---- */
   $('#hourTitle').textContent = isPhone ? '各时段来电热度' : '各时段咨询热度';
@@ -1238,10 +1435,12 @@ function go(v){
   icons();
 }
 document.querySelectorAll('.nav-item').forEach(n=>n.addEventListener('click',()=>go(n.dataset.view)));
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeDrawer();closeUpload();}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeDrawer();closeUpload();closeDeleteDocModal();}});
 
 /* ---------------- INIT ---------------- */
 renderKpis();renderDashIssues();renderAgents();renderKb();renderAnaKpis();renderTopQ();renderIssueKpis();renderIssues();
+// 填充使用分析页公司筛选下拉
+(function(){const dd=document.getElementById('anaCoDd');if(!dd)return;companies.forEach(c=>{const d=document.createElement('div');d.className='dd-item';d.textContent=c.n;d.onclick=e=>{e.stopPropagation();pickAnaCo(c.n,d);};dd.appendChild(d);});})();
 icons();drawCharts();
 </script>
 </body>
