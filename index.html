@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>智能客服运营平台</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.460.0/lucide.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.460.0/dist/umd/lucide.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --blue:#1868DB; --blue-strong:#0C5BCE; --blue-soft:#E9F2FF; --blue-soft2:#F2F7FF;
@@ -17,7 +19,19 @@
   --radius:8px; --radius-lg:12px;
   --shadow:0 1px 1px rgba(9,30,66,.08),0 0 1px rgba(9,30,66,.12);
   --shadow-pop:0 8px 24px -4px rgba(9,30,66,.18),0 0 1px rgba(9,30,66,.2);
-  --font:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+  --font:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+
+  /* ---- refreshed tokens (agents / kb / issues pages) ---- */
+  --color-table-header:#F3F4F6;
+  --color-border:#E5E7EB;
+  --color-text-primary:#111827;
+  --color-text-secondary:#6B7280;
+  --color-brand:#4F46E5;
+  --color-brand-text:#FFFFFF;
+  --color-invite-bg:#EDE9FE; --color-invite-text:#5B21B6; --color-invite-icon:#4F46E5;
+  --color-pending-bg:#FEF3C7; --color-pending-text:#B45309; --color-pending-icon:#F97316;
+  --color-active-bg:#D1FAE5; --color-active-text:#047857; --color-active-icon:#22C55E;
+  --radius-sm:8px; --radius-pill:9999px; --spacing-base:8px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
@@ -60,7 +74,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .crumb{display:flex;align-items:center;gap:7px;color:var(--ink-4);font-size:13px}
 .crumb b{color:var(--ink);font-weight:600}
 .crumb svg{width:14px;height:14px}
-.search{margin-left:auto;display:flex;align-items:center;gap:8px;background:var(--canvas);border:1px solid var(--line);border-radius:7px;padding:7px 11px;width:300px;color:var(--ink-4)}
+.search{margin-left:auto;display:flex;align-items:center;gap:8px;background:var(--canvas);border:1px solid var(--color-border);border-radius:var(--radius-sm);padding:7px 11px;width:300px;color:var(--ink-4)}
 .search svg{width:15px;height:15px}
 .search input{border:none;background:none;outline:none;font-size:13px;color:var(--ink);width:100%}
 .search input::placeholder{color:var(--ink-4)}
@@ -78,26 +92,40 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .phead h1{font-size:21px;font-weight:700;letter-spacing:-.2px;display:flex;align-items:center;gap:10px}
 .phead p{color:var(--ink-3);font-size:13px;margin-top:5px;max-width:640px}
 .phead-actions{display:flex;align-items:center;gap:9px;flex:0 0 auto}
+.count-badge{display:inline-flex;align-items:center;background:#E5E7EB;color:#374151;font-size:12px;font-weight:600;padding:2px 8px;border-radius:var(--radius-pill)}
 
-.btn{display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:7px;font-size:13px;font-weight:600;background:var(--white);border:1px solid var(--line);color:var(--ink-2);white-space:nowrap}
+.btn{display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 16px;border-radius:var(--radius-pill);font-size:13px;font-weight:600;background:var(--white);border:1px solid var(--color-border);color:var(--ink-2);white-space:nowrap}
 .btn:hover{background:var(--canvas)}
 .btn svg{width:15px;height:15px}
-.btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}
-.btn.primary:hover{background:var(--blue-strong)}
+.btn.primary{background:var(--color-brand);border-color:var(--color-brand);color:var(--color-brand-text)}
+.btn.primary:hover{background:#4338CA}
 .btn.ghost{border-color:transparent;background:transparent}
 .btn.ghost:hover{background:var(--line-2)}
 
 /* toolbar filters */
-.toolbar{display:flex;align-items:center;gap:9px;margin-bottom:14px;flex-wrap:wrap}
-.fbtn{display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 11px;border-radius:7px;font-size:13px;font-weight:500;background:var(--white);border:1px solid var(--line);color:var(--ink-2)}
+.toolbar{display:flex;align-items:center;gap:9px;margin-bottom:14px;flex-wrap:nowrap;overflow:visible}
+.fbtn{position:relative;display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 13px;border-radius:var(--radius-pill);font-size:13px;font-weight:500;background:var(--white);border:1px solid var(--color-border);color:var(--ink-2);cursor:pointer;user-select:none}
 .fbtn:hover{background:var(--canvas)}
 .fbtn svg{width:14px;height:14px;color:var(--ink-3)}
-.fbtn b{color:var(--ink);font-weight:600}
+.fbtn b{color:var(--ink);font-weight:600;margin-left:auto}
 .fbtn .chev{margin-left:1px}
+.fbtn.open{border-color:var(--color-brand);color:var(--ink)}
+#agentStatusBtn{min-width:114px}
+#agentModelBtn{min-width:164px}
+#kbCoBtn,#issueCoBtn{min-width:200px}
+#kbTagBtn{min-width:132px}
+#kbStBtn{min-width:118px}
+#issueCatBtn{min-width:132px}
+#issueSortBtn{min-width:126px}
+.dd-menu{position:absolute;top:calc(100% + 6px);left:0;min-width:150px;background:#fff;border:1px solid var(--color-border);border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,.1);z-index:300;display:none;overflow:hidden}
+.fbtn.open .dd-menu{display:block}
+.dd-item{padding:9px 14px;font-size:13px;color:var(--ink-2);cursor:pointer;white-space:nowrap}
+.dd-item:hover{background:var(--canvas)}
+.dd-item.on{color:var(--color-brand);font-weight:600;background:var(--color-invite-bg)}
 .spacer{flex:1}
-.seg{display:inline-flex;background:var(--canvas);border:1px solid var(--line);border-radius:8px;padding:2px}
+.seg{display:inline-flex;background:var(--canvas);border:1px solid var(--color-brand);border-radius:8px;padding:2px}
 .seg button{height:28px;padding:0 12px;border-radius:6px;font-size:12.5px;font-weight:600;color:var(--ink-3)}
-.seg button.on{background:var(--white);color:var(--ink);box-shadow:var(--shadow)}
+.seg button.on{background:var(--color-brand);color:#fff;box-shadow:none}
 
 /* cards / panels */
 .panel{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow)}
@@ -109,7 +137,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .link svg{width:13px;height:13px}
 
 /* KPI grid */
-.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:18px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
 .kpi{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-lg);padding:16px 16px 14px;box-shadow:var(--shadow)}
 .kpi .top{display:flex;align-items:center;justify-content:space-between;color:var(--ink-3);font-size:12.5px;font-weight:500}
 .kpi .ico{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:var(--blue-soft);color:var(--blue)}
@@ -135,34 +163,34 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .legend .pc{margin-left:auto;font-weight:600;color:var(--ink)}
 
 /* tables */
-.tbl-wrap{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow);overflow:hidden}
+.tbl-wrap{background:var(--white);border:1px solid var(--color-border);border-radius:var(--radius-lg);overflow:hidden}
 table{width:100%;border-collapse:collapse}
-thead th{text-align:left;font-size:11.5px;font-weight:600;color:var(--ink-3);text-transform:uppercase;letter-spacing:.4px;padding:11px 16px;background:var(--canvas);border-bottom:1px solid var(--line);white-space:nowrap}
-tbody td{padding:13px 16px;border-bottom:1px solid var(--line-2);font-size:13.5px;vertical-align:middle}
+thead th{text-align:left;font-size:13px;font-weight:500;color:var(--color-text-secondary);padding:13px 16px;background:var(--color-table-header);border-bottom:1px solid var(--color-border);white-space:nowrap}
+tbody td{padding:18px 16px;border-bottom:1px solid var(--color-border);font-size:13.5px;vertical-align:middle}
 tbody tr:last-child td{border-bottom:none}
 tbody tr{transition:background .12s}
-tbody tr:hover{background:var(--blue-soft2)}
+tbody tr:hover{background:#F9FAFB}
 .tbl-foot{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;color:var(--ink-4);font-size:12.5px;background:var(--canvas);border-top:1px solid var(--line)}
 .cell-main{font-weight:600;color:var(--ink)}
 .cell-sub{font-size:12px;color:var(--ink-4);margin-top:1px}
-td.right{text-align:right}
+td.right,th.right{text-align:right}
 .row-link{cursor:pointer}
 
 /* company / agent cell */
 .co{display:flex;align-items:center;gap:11px}
-.co-logo{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex:0 0 auto}
+.co-logo{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:#fff;flex:0 0 auto}
 .co-logo svg{width:17px;height:17px}
 
 /* pills */
-.pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:.3px;padding:3px 8px;border-radius:5px;text-transform:uppercase;white-space:nowrap}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;padding:4px 12px;border-radius:7px;white-space:nowrap}
 .pill svg{width:11px;height:11px}
 .pill .pdot{width:6px;height:6px;border-radius:50%}
-.p-green{background:var(--green-bg);color:var(--green)}
-.p-orange{background:var(--orange-bg);color:var(--orange)}
+.p-green{background:var(--color-active-bg);color:var(--color-active-text)}
+.p-orange{background:var(--color-pending-bg);color:var(--color-pending-text)}
 .p-red{background:var(--red-bg);color:var(--red)}
-.p-purple{background:var(--purple-bg);color:var(--purple)}
-.p-blue{background:var(--blue-soft);color:var(--blue)}
-.p-gray{background:#EBECF0;color:var(--ink-3)}
+.p-purple{background:var(--color-invite-bg);color:var(--color-invite-text)}
+.p-blue{background:var(--color-invite-bg);color:var(--color-invite-text)}
+.p-gray{background:#E5E7EB;color:#374151}
 .p-teal{background:var(--teal-bg);color:var(--teal)}
 
 /* tags */
@@ -279,18 +307,12 @@ td.right{text-align:right}
       <div class="nav-label">运营总览</div>
       <button class="nav-item on" data-view="dash"><i data-lucide="layout-dashboard"></i><span class="txt">数据概览</span></button>
       <div class="nav-label">客服管理</div>
-      <button class="nav-item" data-view="agents"><i data-lucide="bot"></i><span class="txt">客服智能体</span></button>
-      <button class="nav-item" data-view="kb"><i data-lucide="library"></i><span class="txt">知识库管理</span></button>
+      <button class="nav-item" data-view="agents"><i data-lucide="bot"></i><span class="txt">智能体管理</span></button>
+      <button class="nav-item" data-view="kb"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M16 12h2"/><path d="M16 8h2"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/><path d="M6 12h2"/><path d="M6 8h2"/></svg><span class="txt">知识库管理</span></button>
       <div class="nav-label">分析与优化</div>
       <button class="nav-item" data-view="analytics"><i data-lucide="bar-chart-3"></i><span class="txt">使用分析</span></button>
-      <button class="nav-item" data-view="issues"><i data-lucide="message-square-warning"></i><span class="txt">疑难问题</span><span class="nav-badge num">47</span></button>
-      <div class="nav-label">系统</div>
-      <button class="nav-item" data-view="settings"><i data-lucide="settings"></i><span class="txt">系统设置</span></button>
+      <button class="nav-item" data-view="issues"><i data-lucide="message-square-warning"></i><span class="txt">未命中意图</span></button>
     </nav>
-    <div class="side-foot">
-      <div class="avatar">达</div>
-      <div class="meta"><b>张达奇</b><span>平台运营管理员</span></div>
-    </div>
   </aside>
 
   <!-- ============ MAIN ============ -->
@@ -302,12 +324,6 @@ td.right{text-align:right}
         <i data-lucide="chevron-right" style="color:var(--ink-4)"></i>
         <b id="crumb-cur">数据概览</b>
       </div>
-      <div class="search">
-        <i data-lucide="search"></i>
-        <input placeholder="搜索公司、智能体、知识库或问题…">
-      </div>
-      <button class="icon-btn" title="帮助"><i data-lucide="circle-help"></i></button>
-      <button class="icon-btn" title="通知"><i data-lucide="bell"></i></button>
     </header>
 
     <div class="content" id="content">
@@ -316,10 +332,17 @@ td.right{text-align:right}
         <div class="phead">
           <div>
             <h1>数据概览</h1>
-            <p>已接入 8 家公交公司的 AI 客服运行情况汇总。数据每 15 分钟刷新一次，下方为本月累计指标。</p>
           </div>
           <div class="phead-actions">
-            <button class="btn"><i data-lucide="calendar"></i>本月 (6月) <i data-lucide="chevron-down"></i></button>
+            <div class="search" style="width:240px;height:34px">
+              <i data-lucide="search"></i><input placeholder="搜索公司、数据…">
+            </div>
+            <div style="display:inline-flex;align-items:center;gap:6px;border:1px solid var(--color-border);border-radius:var(--radius-pill);padding:0 12px;height:34px;background:#fff;font-size:13px;color:var(--ink)">
+              <i data-lucide="calendar" style="width:14px;height:14px;color:var(--ink-3)"></i>
+              <input type="date" value="2026-06-01" style="border:none;outline:none;font-size:13px;color:var(--ink);background:transparent;cursor:pointer">
+              <span style="color:var(--ink-4)">—</span>
+              <input type="date" value="2026-06-30" style="border:none;outline:none;font-size:13px;color:var(--ink);background:transparent;cursor:pointer">
+            </div>
             <button class="btn"><i data-lucide="download"></i>导出报告</button>
           </div>
         </div>
@@ -346,13 +369,13 @@ td.right{text-align:right}
         <div class="grid-2">
           <div class="panel">
             <div class="panel-h">
-              <h3>待处理疑难问题 <span class="sub">· AI 答复缺口</span></h3>
+              <h3>未命中意图 <span class="sub">· AI 答复缺口</span></h3>
               <button class="link" onclick="go('issues')">查看全部 <i data-lucide="arrow-right"></i></button>
             </div>
             <div id="dashIssues"></div>
           </div>
           <div class="panel">
-            <div class="panel-h"><h3>各公司问答量 <span class="sub">· 本月</span></h3></div>
+            <div class="panel-h"><h3>各公司 APP 问答量 <span class="sub">· 本月</span></h3></div>
             <div class="panel-b"><div class="chart-sm" style="height:250px"><canvas id="coChart"></canvas></div></div>
           </div>
         </div>
@@ -362,29 +385,43 @@ td.right{text-align:right}
       <section class="view" id="view-agents">
         <div class="phead">
           <div>
-            <h1>客服智能体</h1>
-            <p>每家公交公司配置一个专属 AI 客服智能体。点击任意一行查看智能体配置详情与运行状态。</p>
-          </div>
-          <div class="phead-actions">
-            <button class="btn"><i data-lucide="settings-2"></i>批量配置</button>
-            <button class="btn primary"><i data-lucide="plus"></i>接入新公司</button>
+            <h1>智能体管理</h1>
           </div>
         </div>
         <div class="toolbar">
-          <button class="fbtn"><i data-lucide="filter"></i>状态：<b>全部</b><i data-lucide="chevron-down" class="chev"></i></button>
-          <button class="fbtn"><i data-lucide="cpu"></i>模型：<b>全部</b><i data-lucide="chevron-down" class="chev"></i></button>
+          <div class="seg" id="agentChTab">
+            <button class="on" data-ch="app" onclick="setAgentCh('app')"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><path d="M12 6V2H8"/><path d="M15 11v2"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M20 16a2 2 0 0 1-2 2H8.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 4 20.286V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z"/><path d="M9 11v2"/></svg>APP 智能客服中心</button>
+            <button data-ch="phone" onclick="setAgentCh('phone')"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>AI 电话客服系统</button>
+          </div>
           <div class="spacer"></div>
-          <button class="fbtn"><i data-lucide="arrow-up-down"></i>按问答量排序</button>
+          <div class="search" style="width:180px;height:32px">
+            <i data-lucide="search"></i><input placeholder="搜索公司或智能体…">
+          </div>
+          <button class="fbtn" id="agentStatusBtn" onclick="toggleDd('agentStatusDd',this)"><i data-lucide="filter"></i>状态：<b id="agentStatusLbl">全部</b><i data-lucide="chevron-down" class="chev"></i>
+            <div class="dd-menu" id="agentStatusDd" onclick="event.stopPropagation()">
+              <div class="dd-item on" onclick="setFbtn('agentStatusBtn','agentStatusLbl','agentStatusDd',this,'全部')">全部</div>
+              <div class="dd-item" onclick="setFbtn('agentStatusBtn','agentStatusLbl','agentStatusDd',this,'运行中')">运行中</div>
+              <div class="dd-item" onclick="setFbtn('agentStatusBtn','agentStatusLbl','agentStatusDd',this,'调试中')">调试中</div>
+              <div class="dd-item" onclick="setFbtn('agentStatusBtn','agentStatusLbl','agentStatusDd',this,'已停用')">已停用</div>
+            </div>
+          </button>
+          <button class="fbtn" id="agentModelBtn" onclick="toggleDd('agentModelDd',this)"><i data-lucide="cpu"></i>模型：<b id="agentModelLbl">全部</b><i data-lucide="chevron-down" class="chev"></i>
+            <div class="dd-menu" id="agentModelDd" onclick="event.stopPropagation()">
+              <div class="dd-item on" onclick="setFbtn('agentModelBtn','agentModelLbl','agentModelDd',this,'全部')">全部</div>
+              <div class="dd-item" onclick="setFbtn('agentModelBtn','agentModelLbl','agentModelDd',this,'DeepSeek-V3')">DeepSeek-V3</div>
+              <div class="dd-item" onclick="setFbtn('agentModelBtn','agentModelLbl','agentModelDd',this,'通义千问-Max')">通义千问-Max</div>
+              <div class="dd-item" onclick="setFbtn('agentModelBtn','agentModelLbl','agentModelDd',this,'通义千问-Plus')">通义千问-Plus</div>
+              <div class="dd-item" onclick="setFbtn('agentModelBtn','agentModelLbl','agentModelDd',this,'文心一言 4.0')">文心一言 4.0</div>
+            </div>
+          </button>
+          <button class="btn primary" style="height:32px;font-size:12.5px;white-space:nowrap"><i data-lucide="plus"></i>接入新公司</button>
         </div>
         <div class="tbl-wrap">
           <table>
-            <thead><tr>
-              <th>公司 / 智能体</th><th>状态</th><th>模型</th><th>知识库</th>
-              <th class="right">本月问答</th><th>解决率</th><th>更新时间</th><th></th>
-            </tr></thead>
+            <thead><tr id="agentThead"></tr></thead>
             <tbody id="agentRows"></tbody>
           </table>
-          <div class="tbl-foot"><span>共 8 家公司</span><span>每页 8 条</span></div>
+          <div class="tbl-foot"><span>共 9 家公司</span><span>每页 9 条</span></div>
         </div>
       </section>
 
@@ -393,31 +430,65 @@ td.right{text-align:right}
         <div class="phead">
           <div>
             <h1>知识库管理</h1>
-            <p>管理各公司客服的知识库文档。上传时可打标签归类，系统将自动解析、切分并向量化入库供智能体检索。</p>
-          </div>
-          <div class="phead-actions">
-            <button class="btn"><i data-lucide="folder-tree"></i>标签管理</button>
-            <button class="btn primary" onclick="openUpload()"><i data-lucide="upload"></i>上传知识库</button>
           </div>
         </div>
         <div class="toolbar">
-          <button class="fbtn"><i data-lucide="building-2"></i>公司：<b>大连公交集团</b><i data-lucide="chevron-down" class="chev"></i></button>
-          <button class="fbtn"><i data-lucide="tag"></i>标签：<b>全部</b><i data-lucide="chevron-down" class="chev"></i></button>
-          <button class="fbtn"><i data-lucide="circle-dot"></i>状态：<b>全部</b><i data-lucide="chevron-down" class="chev"></i></button>
+          <div class="seg" id="kbChTab">
+            <button class="on" data-ch="all" onclick="setKbCh('all')"><i data-lucide="layers" style="width:13px;height:13px;vertical-align:-2px;margin-right:4px"></i>全部渠道</button>
+            <button data-ch="app" onclick="setKbCh('app')"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><path d="M12 6V2H8"/><path d="M15 11v2"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M20 16a2 2 0 0 1-2 2H8.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 4 20.286V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z"/><path d="M9 11v2"/></svg>APP 智能客服中心</button>
+            <button data-ch="phone" onclick="setKbCh('phone')"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>AI 电话客服系统</button>
+          </div>
           <div class="spacer"></div>
-          <div class="search" style="width:230px;height:32px">
+          <div class="search" style="width:180px;height:32px">
             <i data-lucide="search"></i><input placeholder="搜索文档名称">
           </div>
+          <button class="fbtn" id="kbCoBtn" onclick="toggleDd('kbCoDd',this)"><i data-lucide="building-2"></i>公司：<b id="kbCoLbl">全部</b><i data-lucide="chevron-down" class="chev"></i>
+            <div class="dd-menu" id="kbCoDd" onclick="event.stopPropagation()">
+              <div class="dd-item on" onclick="setFbtn('kbCoBtn','kbCoLbl','kbCoDd',this,'全部')">全部</div>
+              <div class="dd-item" onclick="setFbtn('kbCoBtn','kbCoLbl','kbCoDd',this,'临沂公交')">临沂公交</div>
+              <div class="dd-item" onclick="setFbtn('kbCoBtn','kbCoLbl','kbCoDd',this,'哈尔滨公交')">哈尔滨公交</div>
+              <div class="dd-item" onclick="setFbtn('kbCoBtn','kbCoLbl','kbCoDd',this,'琴岛公交')">琴岛公交</div>
+              <div class="dd-item" onclick="setFbtn('kbCoBtn','kbCoLbl','kbCoDd',this,'大连公交')">大连公交</div>
+              <div class="dd-item" onclick="setFbtn('kbCoBtn','kbCoLbl','kbCoDd',this,'长春公交')">长春公交</div>
+              <div class="dd-item" onclick="setFbtn('kbCoBtn','kbCoLbl','kbCoDd',this,'淄博公交')">淄博公交</div>
+              <div class="dd-item" onclick="setFbtn('kbCoBtn','kbCoLbl','kbCoDd',this,'淮安公交')">淮安公交</div>
+              <div class="dd-item" onclick="setFbtn('kbCoBtn','kbCoLbl','kbCoDd',this,'大元公交')">大元公交</div>
+              <div class="dd-item" onclick="setFbtn('kbCoBtn','kbCoLbl','kbCoDd',this,'沧州公交')">沧州公交</div>
+            </div>
+          </button>
+          <button class="fbtn" id="kbTagBtn" onclick="toggleDd('kbTagDd',this)"><i data-lucide="tag"></i>标签：<b id="kbTagLbl">全部</b><i data-lucide="chevron-down" class="chev"></i>
+            <div class="dd-menu" id="kbTagDd" onclick="event.stopPropagation()">
+              <div class="dd-item on" onclick="setFbtn('kbTagBtn','kbTagLbl','kbTagDd',this,'全部')">全部</div>
+              <div class="dd-item" onclick="setFbtn('kbTagBtn','kbTagLbl','kbTagDd',this,'线路查询')">线路查询</div>
+              <div class="dd-item" onclick="setFbtn('kbTagBtn','kbTagLbl','kbTagDd',this,'票价政策')">票价政策</div>
+              <div class="dd-item" onclick="setFbtn('kbTagBtn','kbTagLbl','kbTagDd',this,'运营时刻')">运营时刻</div>
+              <div class="dd-item" onclick="setFbtn('kbTagBtn','kbTagLbl','kbTagDd',this,'优惠卡办理')">优惠卡办理</div>
+              <div class="dd-item" onclick="setFbtn('kbTagBtn','kbTagLbl','kbTagDd',this,'乘车规则')">乘车规则</div>
+              <div class="dd-item" onclick="setFbtn('kbTagBtn','kbTagLbl','kbTagDd',this,'失物招领')">失物招领</div>
+              <div class="dd-item" onclick="setFbtn('kbTagBtn','kbTagLbl','kbTagDd',this,'投诉建议')">投诉建议</div>
+            </div>
+          </button>
+          <button class="fbtn" id="kbStBtn" onclick="toggleDd('kbStDd',this)"><i data-lucide="circle-dot"></i>状态：<b id="kbStLbl">全部</b><i data-lucide="chevron-down" class="chev"></i>
+            <div class="dd-menu" id="kbStDd" onclick="event.stopPropagation()">
+              <div class="dd-item on" onclick="setFbtn('kbStBtn','kbStLbl','kbStDd',this,'全部')">全部</div>
+              <div class="dd-item" onclick="setFbtn('kbStBtn','kbStLbl','kbStDd',this,'已发布')">已发布</div>
+              <div class="dd-item" onclick="setFbtn('kbStBtn','kbStLbl','kbStDd',this,'解析中')">解析中</div>
+              <div class="dd-item" onclick="setFbtn('kbStBtn','kbStLbl','kbStDd',this,'草稿')">草稿</div>
+              <div class="dd-item" onclick="setFbtn('kbStBtn','kbStLbl','kbStDd',this,'解析失败')">解析失败</div>
+            </div>
+          </button>
+          <button class="btn" style="height:32px;font-size:12.5px;white-space:nowrap"><i data-lucide="folder-tree"></i>标签管理</button>
+          <button class="btn primary" style="height:32px;font-size:12.5px;white-space:nowrap" onclick="openUpload()"><i data-lucide="upload"></i>上传知识库</button>
         </div>
         <div class="tbl-wrap">
           <table>
             <thead><tr>
-              <th style="width:32%">文档名称</th><th>标签</th><th>状态</th>
-              <th class="right">命中次数</th><th>切片</th><th>上传人</th><th>更新时间</th><th></th>
+              <th style="width:30%">文档名称</th><th>标签</th><th>适用渠道</th><th>状态</th>
+              <th class="right">命中次数</th><th>切片</th><th>上传人</th><th>更新时间</th>
             </tr></thead>
             <tbody id="kbRows"></tbody>
           </table>
-          <div class="tbl-foot"><span>大连公交集团 · 共 36 个文档</span><span>1 / 5 页</span></div>
+          <div class="tbl-foot"><span id="kbFootCount">共 11 个文档</span><span>1 / 2 页</span></div>
         </div>
       </section>
 
@@ -426,32 +497,40 @@ td.right{text-align:right}
         <div class="phead">
           <div>
             <h1>使用分析</h1>
-            <p>AI 客服智能体的使用情况统计。可按公司与时间区间下钻，用于评估服务质量与资源消耗。</p>
           </div>
-          <div class="phead-actions">
-            <button class="btn"><i data-lucide="building-2"></i>全部公司 <i data-lucide="chevron-down"></i></button>
-            <button class="btn"><i data-lucide="calendar"></i>近 30 天 <i data-lucide="chevron-down"></i></button>
-            <button class="btn"><i data-lucide="download"></i>导出</button>
+        </div>
+        <div class="toolbar">
+          <div class="seg" id="anaChTab">
+            <button class="on" data-ch="all" onclick="setAnaCh('all')">全部渠道</button>
+            <button data-ch="app" onclick="setAnaCh('app')"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><path d="M12 6V2H8"/><path d="M15 11v2"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M20 16a2 2 0 0 1-2 2H8.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 4 20.286V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z"/><path d="M9 11v2"/></svg>APP 智能客服中心</button>
+            <button data-ch="phone" onclick="setAnaCh('phone')"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>AI 电话客服系统</button>
           </div>
+          <div class="spacer"></div>
+          <div class="search" style="width:190px;height:32px">
+            <i data-lucide="search"></i><input placeholder="搜索公司或数据…">
+          </div>
+          <button class="fbtn"><i data-lucide="building-2"></i>全部公司<i data-lucide="chevron-down" class="chev"></i></button>
+          <button class="fbtn"><i data-lucide="calendar"></i>近 30 天<i data-lucide="chevron-down" class="chev"></i></button>
+          <button class="btn" style="height:32px;font-size:12.5px"><i data-lucide="download"></i>导出</button>
         </div>
         <div class="kpis" id="anaKpis" style="grid-template-columns:repeat(5,1fr)"></div>
         <div class="grid-2">
           <div class="panel">
-            <div class="panel-h"><h3>问答量与 Token 消耗</h3><span class="sub">双轴 · 近 30 天</span></div>
+            <div class="panel-h"><h3 id="anaTrendTitle">问答量与 Token 消耗</h3><span class="sub" id="anaTrendSub">双轴 · 近 30 天</span></div>
             <div class="panel-b"><div class="chart-wrap"><canvas id="anaTrend"></canvas></div></div>
           </div>
           <div class="panel">
-            <div class="panel-h"><h3>各时段咨询热度</h3><span class="sub">24 小时</span></div>
+            <div class="panel-h"><h3 id="hourTitle">各时段咨询热度</h3><span class="sub">24 小时</span></div>
             <div class="panel-b"><div class="chart-wrap"><canvas id="hourChart"></canvas></div></div>
           </div>
         </div>
         <div class="grid-2">
           <div class="panel">
-            <div class="panel-h"><h3>高频问题 TOP 10</h3><button class="link">导出明细 <i data-lucide="arrow-right"></i></button></div>
+            <div class="panel-h"><h3 id="topQTitle">高频问题 TOP 10</h3><button class="link">导出明细 <i data-lucide="arrow-right"></i></button></div>
             <div id="topQ"></div>
           </div>
           <div class="panel">
-            <div class="panel-h"><h3>满意度与解决率</h3><span class="sub">近 6 个月</span></div>
+            <div class="panel-h"><h3 id="satTitle">满意度与解决率</h3><span class="sub">近 6 个月</span></div>
             <div class="panel-b"><div class="chart-wrap"><canvas id="satChart"></canvas></div></div>
           </div>
         </div>
@@ -461,58 +540,71 @@ td.right{text-align:right}
       <section class="view" id="view-issues">
         <div class="phead">
           <div>
-            <h1>疑难问题</h1>
-            <p>系统自动收集 AI 客服无法作答或答复置信度过低的问题，按语义聚类归并，并生成知识库完善建议，形成「发现缺口 → 补充知识 → 闭环」的运营流程。</p>
+            <h1>未命中意图</h1>
           </div>
           <div class="phead-actions">
-            <button class="btn"><i data-lucide="sparkles"></i>一键生成本周优化清单</button>
+            <button class="btn" onclick="genOptList()"><i data-lucide="sparkles"></i>一键生成本周优化清单</button>
           </div>
         </div>
 
         <div class="kpis" id="issueKpis" style="grid-template-columns:repeat(4,1fr);margin-bottom:18px"></div>
 
         <div class="toolbar">
-          <button class="fbtn"><i data-lucide="building-2"></i>公司：<b>全部</b><i data-lucide="chevron-down" class="chev"></i></button>
-          <button class="fbtn"><i data-lucide="folder"></i>分类：<b>全部</b><i data-lucide="chevron-down" class="chev"></i></button>
-          <div class="seg" style="margin-left:4px">
+          <div class="seg" id="issueChTab">
+            <button class="on" data-ch="all" onclick="setIssueCh('all')">全部渠道</button>
+            <button data-ch="app" onclick="setIssueCh('app')">APP 智能客服中心</button>
+            <button data-ch="phone" onclick="setIssueCh('phone')">AI 电话客服系统</button>
+          </div>
+          <div class="seg">
             <button class="on">待处理</button><button>处理中</button><button>已解决</button><button>已忽略</button>
           </div>
           <div class="spacer"></div>
-          <button class="fbtn"><i data-lucide="arrow-up-down"></i>按出现次数</button>
+          <div class="search" style="width:180px;height:32px">
+            <i data-lucide="search"></i><input placeholder="搜索问题关键词…">
+          </div>
+          <button class="fbtn" id="issueCoBtn" onclick="toggleDd('issueCoDd',this)"><i data-lucide="building-2"></i>公司：<b id="issueCoLbl">全部</b><i data-lucide="chevron-down" class="chev"></i>
+            <div class="dd-menu" id="issueCoDd" onclick="event.stopPropagation()">
+              <div class="dd-item on" onclick="setFbtn('issueCoBtn','issueCoLbl','issueCoDd',this,'全部')">全部</div>
+              <div class="dd-item" onclick="setFbtn('issueCoBtn','issueCoLbl','issueCoDd',this,'临沂公交')">临沂公交</div>
+              <div class="dd-item" onclick="setFbtn('issueCoBtn','issueCoLbl','issueCoDd',this,'哈尔滨公交')">哈尔滨公交</div>
+              <div class="dd-item" onclick="setFbtn('issueCoBtn','issueCoLbl','issueCoDd',this,'琴岛公交')">琴岛公交</div>
+              <div class="dd-item" onclick="setFbtn('issueCoBtn','issueCoLbl','issueCoDd',this,'大连公交')">大连公交</div>
+              <div class="dd-item" onclick="setFbtn('issueCoBtn','issueCoLbl','issueCoDd',this,'长春公交')">长春公交</div>
+              <div class="dd-item" onclick="setFbtn('issueCoBtn','issueCoLbl','issueCoDd',this,'淄博公交')">淄博公交</div>
+              <div class="dd-item" onclick="setFbtn('issueCoBtn','issueCoLbl','issueCoDd',this,'淮安公交')">淮安公交</div>
+              <div class="dd-item" onclick="setFbtn('issueCoBtn','issueCoLbl','issueCoDd',this,'大元公交')">大元公交</div>
+              <div class="dd-item" onclick="setFbtn('issueCoBtn','issueCoLbl','issueCoDd',this,'沧州公交')">沧州公交</div>
+            </div>
+          </button>
+          <button class="fbtn" id="issueCatBtn" onclick="toggleDd('issueCatDd',this)"><i data-lucide="folder"></i>分类：<b id="issueCatLbl">全部</b><i data-lucide="chevron-down" class="chev"></i>
+            <div class="dd-menu" id="issueCatDd" onclick="event.stopPropagation()">
+              <div class="dd-item on" onclick="setFbtn('issueCatBtn','issueCatLbl','issueCatDd',this,'全部')">全部</div>
+              <div class="dd-item" onclick="setFbtn('issueCatBtn','issueCatLbl','issueCatDd',this,'优惠卡办理')">优惠卡办理</div>
+              <div class="dd-item" onclick="setFbtn('issueCatBtn','issueCatLbl','issueCatDd',this,'运营时刻')">运营时刻</div>
+              <div class="dd-item" onclick="setFbtn('issueCatBtn','issueCatLbl','issueCatDd',this,'乘车规则')">乘车规则</div>
+              <div class="dd-item" onclick="setFbtn('issueCatBtn','issueCatLbl','issueCatDd',this,'失物招领')">失物招领</div>
+              <div class="dd-item" onclick="setFbtn('issueCatBtn','issueCatLbl','issueCatDd',this,'票价政策')">票价政策</div>
+            </div>
+          </button>
+          <button class="fbtn" id="issueSortBtn" onclick="toggleDd('issueSortDd',this)"><i data-lucide="arrow-up-down"></i><b id="issueSortLbl">按出现次数</b><i data-lucide="chevron-down" class="chev"></i>
+            <div class="dd-menu" id="issueSortDd" onclick="event.stopPropagation()">
+              <div class="dd-item on" onclick="setFbtn('issueSortBtn','issueSortLbl','issueSortDd',this,'按出现次数')">按出现次数</div>
+              <div class="dd-item" onclick="setFbtn('issueSortBtn','issueSortLbl','issueSortDd',this,'按最近时间')">按最近时间</div>
+            </div>
+          </button>
         </div>
-
         <div class="tbl-wrap">
           <table>
             <thead><tr>
-              <th style="width:38%">聚类问题</th><th>所属公司</th><th>分类</th>
-              <th class="right">出现次数</th><th>最近出现</th><th>状态</th><th></th>
+              <th style="width:32%">聚类问题</th><th>所属公司</th><th>分类</th><th>渠道</th>
+              <th class="right">出现次数</th><th>最近出现</th><th>状态</th>
             </tr></thead>
             <tbody id="issueRows"></tbody>
           </table>
-          <div class="tbl-foot"><span>待处理 · 共 47 个聚类问题</span><span>已自动归并相似提问 1,284 条</span></div>
+          <div class="tbl-foot"><span id="issueFootCount">待处理 · 共 47 个未命中意图</span><span>已自动归并相似提问 1,284 条</span></div>
         </div>
       </section>
 
-      <!-- ========= SETTINGS ========= -->
-      <section class="view" id="view-settings">
-        <div class="phead"><div><h1>系统设置</h1><p>平台级配置项。</p></div></div>
-        <div class="grid-2b">
-          <div class="panel"><div class="panel-h"><h3>模型与接口</h3></div><div class="panel-b">
-            <div class="field"><span class="k">默认大模型</span><span class="v">DeepSeek-V3</span></div>
-            <div class="field"><span class="k">向量检索引擎</span><span class="v">阿里云 DashVector</span></div>
-            <div class="field"><span class="k">Embedding 模型</span><span class="v">text-embedding-v3</span></div>
-            <div class="field"><span class="k">置信度阈值</span><span class="v">0.62 · 低于则记为疑难</span></div>
-            <div class="field"><span class="k">月度 Token 预算</span><span class="v">60,000,000</span></div>
-          </div></div>
-          <div class="panel"><div class="panel-h"><h3>成员与权限</h3></div><div class="panel-b">
-            <div class="field"><span class="k">运营管理员</span><span class="v">张达奇 · 雷善开</span></div>
-            <div class="field"><span class="k">公司侧编辑</span><span class="v">8 人</span></div>
-            <div class="field"><span class="k">疑难问题通知</span><span class="v">企业微信 · 每日 09:00</span></div>
-            <div class="field"><span class="k">知识库审核流程</span><span class="v">已开启 · 两级审核</span></div>
-            <div class="field"><span class="k">操作日志留存</span><span class="v">180 天</span></div>
-          </div></div>
-        </div>
-      </section>
     </div>
   </div>
 </div>
@@ -536,6 +628,11 @@ td.right{text-align:right}
       </div>
       <label class="flabel">归属公司</label>
       <input class="inp" value="大连公交集团" readonly>
+      <label class="flabel">适用渠道 <span style="color:var(--ink-4);font-weight:400">· 该文档供哪些渠道的智能体检索</span></label>
+      <div class="chip-pick" id="chPick">
+        <button class="chip on" data-ch="app" onclick="this.classList.toggle('on')">APP 智能客服中心</button>
+        <button class="chip on" data-ch="phone" onclick="this.classList.toggle('on')">AI 电话客服系统</button>
+      </div>
       <label class="flabel">分类标签 <span style="color:var(--ink-4);font-weight:400">· 可多选，用于智能体检索时按类目召回</span></label>
       <div class="chip-pick" id="tagPick"></div>
       <label class="flabel">文档说明（选填）</label>
@@ -551,76 +648,124 @@ td.right{text-align:right}
 <script>
 /* ---------------- DATA ---------------- */
 const COLORS = ['#1868DB','#4C9AFF','#8FB8FF','#6554C0','#9C8BE0','#6B7A99','#B3BAC5','#2898BD'];
-const coColor = ['#0C5BCE','#974F0C','#206A83','#1F845A','#5E4DB2','#C9372C','#476788','#6554C0'];
+const coColor = ['#0C5BCE','#974F0C','#206A83','#1F845A','#5E4DB2','#C9372C','#476788','#6554C0','#2E7D32'];
 
+/* 每家公司分别配置「APP 智能客服中心」与「AI 电话客服系统」两条独立渠道 */
 const companies = [
-  {n:'大连公交集团',a:'连巴小智',init:'连',m:'DeepSeek-V3',st:'run',kb:36,q:24180,rate:93.4,up:'10 分钟前'},
-  {n:'北京公交集团',a:'京巴客服',init:'京',m:'通义千问-Max',st:'run',kb:58,q:38640,rate:94.1,up:'8 分钟前'},
-  {n:'上海巴士集团',a:'申通小巴',init:'申',m:'DeepSeek-V3',st:'run',kb:51,q:31250,rate:92.7,up:'12 分钟前'},
-  {n:'广州公交集团',a:'羊城巴士助手',init:'穗',m:'通义千问-Plus',st:'run',kb:44,q:22870,rate:90.8,up:'25 分钟前'},
-  {n:'深圳巴士集团',a:'鹏城小客',init:'鹏',m:'DeepSeek-V3',st:'debug',kb:29,q:6420,rate:88.2,up:'1 小时前'},
-  {n:'成都公交集团',a:'蓉城公交助手',init:'蓉',m:'文心一言 4.0',st:'run',kb:40,q:18930,rate:91.5,up:'18 分钟前'},
-  {n:'武汉公交集团',a:'江城客服',init:'江',m:'通义千问-Max',st:'run',kb:33,q:14210,rate:89.6,up:'33 分钟前'},
-  {n:'杭州公交集团',a:'杭巴智答',init:'杭',m:'DeepSeek-V3',st:'off',kb:21,q:0,rate:0,up:'3 天前'}
+  {n:'临沂公交',init:'临',kb:42,
+    app:{a:'临沂公交·APP客服',m:'DeepSeek-V3',st:'run',q:18640,tokens:6.2,rate:92.1,up:'5 分钟前'},
+    phone:{a:'临沂公交·语音客服',m:'DeepSeek-V3',st:'run',calls:4280,avgDur:88,rate:88.4,up:'5 分钟前'}},
+  {n:'哈尔滨公交',init:'哈',kb:63,
+    app:{a:'哈尔滨公交·APP客服',m:'通义千问-Max',st:'run',q:31200,tokens:10.8,rate:93.6,up:'8 分钟前'},
+    phone:{a:'哈尔滨公交·语音客服',m:'通义千问-Max',st:'run',calls:9840,avgDur:91,rate:90.2,up:'8 分钟前'}},
+  {n:'琴岛公交',init:'琴',kb:38,
+    app:{a:'琴岛公交·APP客服',m:'DeepSeek-V3',st:'run',q:22480,tokens:7.6,rate:91.8,up:'12 分钟前'},
+    phone:{a:'琴岛公交·语音客服',m:'DeepSeek-V3',st:'run',calls:6120,avgDur:95,rate:87.9,up:'12 分钟前'}},
+  {n:'大连公交',init:'连',kb:55,
+    app:{a:'大连公交·APP客服',m:'DeepSeek-V3',st:'run',q:28340,tokens:9.4,rate:94.2,up:'3 分钟前'},
+    phone:{a:'大连公交·语音客服',m:'DeepSeek-V3',st:'run',calls:7960,avgDur:84,rate:91.5,up:'3 分钟前'}},
+  {n:'长春公交',init:'春',kb:47,
+    app:{a:'长春公交·APP客服',m:'通义千问-Plus',st:'run',q:19870,tokens:6.8,rate:90.4,up:'15 分钟前'},
+    phone:{a:'长春公交·语音客服',m:'通义千问-Plus',st:'run',calls:5340,avgDur:102,rate:86.7,up:'15 分钟前'}},
+  {n:'淄博公交',init:'淄',kb:31,
+    app:{a:'淄博公交·APP客服',m:'DeepSeek-V3',st:'debug',q:8640,tokens:2.9,rate:83.2,up:'1 小时前'},
+    phone:{a:'淄博公交·语音客服',m:'DeepSeek-V3',st:'debug',calls:1860,avgDur:118,rate:79.6,up:'1 小时前'}},
+  {n:'淮安公交',init:'淮',kb:29,
+    app:{a:'淮安公交·APP客服',m:'文心一言 4.0',st:'run',q:14320,tokens:4.8,rate:89.7,up:'20 分钟前'},
+    phone:{a:'淮安公交·语音客服',m:'文心一言 4.0',st:'run',calls:3980,avgDur:97,rate:85.3,up:'20 分钟前'}},
+  {n:'大元公交',init:'元',kb:24,
+    app:{a:'大元公交·APP客服',m:'通义千问-Max',st:'run',q:11240,tokens:3.7,rate:88.9,up:'30 分钟前'},
+    phone:{a:'大元公交·语音客服',m:'通义千问-Max',st:'run',calls:2940,avgDur:109,rate:84.1,up:'30 分钟前'}},
+  {n:'沧州公交',init:'沧',kb:18,
+    app:{a:'沧州公交·APP客服',m:'DeepSeek-V3',st:'off',q:0,tokens:0,rate:0,up:'3 天前'},
+    phone:{a:'沧州公交·语音客服',m:'DeepSeek-V3',st:'off',calls:0,avgDur:0,rate:0,up:'3 天前'}}
 ];
 const stMap = {run:['p-green','运行中','play'],debug:['p-orange','调试中','flask-conical'],off:['p-gray','已停用','pause']};
+let curAgentCh='app'; // 'app' | 'phone' — 客服智能体页当前查看渠道
+function fmtDur(sec){if(!sec)return'—';return `${Math.floor(sec/60)}'${String(sec%60).padStart(2,'0')}"`;}
 
 const kbTags = ['线路查询','票价政策','运营时刻','优惠卡办理','失物招领','投诉建议','乘车规则','实时公交','充电桩','定制公交'];
+/* ch: 该文档供哪些渠道的智能体检索使用 — app=APP智能客服中心，phone=AI电话客服系统 */
 const kbDocs = [
-  {n:'大连公交线路明细表（2026版）',type:'xls',tags:['线路查询','运营时刻'],st:'ok',hit:4820,chunk:312,by:'雷善开',up:'2026-06-22'},
-  {n:'城市公交票价及计费规则说明',type:'doc',tags:['票价政策'],st:'ok',hit:3960,chunk:88,by:'雷善开',up:'2026-06-20'},
-  {n:'老年卡 / 学生卡办理流程指引',type:'pdf',tags:['优惠卡办理'],st:'ok',hit:2745,chunk:64,by:'张达奇',up:'2026-06-19'},
-  {n:'失物招领登记与认领须知',type:'doc',tags:['失物招领'],st:'ok',hit:1530,chunk:42,by:'张达奇',up:'2026-06-18'},
-  {n:'2026夏季线路临时调整公告',type:'pdf',tags:['线路查询','运营时刻'],st:'parsing',hit:0,chunk:0,by:'雷善开',up:'刚刚'},
-  {n:'定制公交开通申请与定价办法',type:'doc',tags:['定制公交','票价政策'],st:'ok',hit:980,chunk:57,by:'雷善开',up:'2026-06-15'},
-  {n:'乘车文明规范与禁带物品清单',type:'pdf',tags:['乘车规则'],st:'ok',hit:1240,chunk:36,by:'张达奇',up:'2026-06-12'},
-  {n:'新能源充电桩站点分布表',type:'xls',tags:['充电桩'],st:'fail',hit:0,chunk:0,by:'雷善开',up:'2026-06-11'},
-  {n:'投诉建议受理与回复时限规定',type:'doc',tags:['投诉建议'],st:'ok',hit:670,chunk:29,by:'张达奇',up:'2026-06-09'},
-  {n:'实时公交小程序使用帮助',type:'md',tags:['实时公交'],st:'draft',hit:0,chunk:0,by:'张达奇',up:'2026-06-08'}
+  {n:'公交线路明细表（2026版）',type:'xls',tags:['线路查询','运营时刻'],ch:['app','phone'],st:'ok',hit:4820,chunk:312,by:'王明辉',up:'2026-06-22 14:30'},
+  {n:'城市公交票价及计费规则说明',type:'doc',tags:['票价政策'],ch:['app','phone'],st:'ok',hit:3960,chunk:88,by:'李晓燕',up:'2026-06-20 09:15'},
+  {n:'老年卡 / 学生卡办理流程指引',type:'pdf',tags:['优惠卡办理'],ch:['app','phone'],st:'ok',hit:2745,chunk:64,by:'陈志强',up:'2026-06-19 16:42'},
+  {n:'失物招领登记与认领须知',type:'doc',tags:['失物招领'],ch:['app','phone'],st:'ok',hit:1530,chunk:42,by:'刘思雨',up:'2026-06-18 11:08'},
+  {n:'2026夏季线路临时调整公告',type:'pdf',tags:['线路查询','运营时刻'],ch:['app','phone'],st:'parsing',hit:0,chunk:0,by:'王明辉',up:'2026-06-30 08:52'},
+  {n:'定制公交开通申请与定价办法',type:'doc',tags:['定制公交','票价政策'],ch:['app','phone'],st:'ok',hit:980,chunk:57,by:'赵建国',up:'2026-06-15 13:20'},
+  {n:'乘车文明规范与禁带物品清单',type:'pdf',tags:['乘车规则'],ch:['app','phone'],st:'ok',hit:1240,chunk:36,by:'陈志强',up:'2026-06-12 10:35'},
+  {n:'新能源充电桩站点分布表',type:'xls',tags:['充电桩'],ch:['app','phone'],st:'fail',hit:0,chunk:0,by:'李晓燕',up:'2026-06-11 17:00'},
+  {n:'投诉建议受理与回复时限规定',type:'doc',tags:['投诉建议'],ch:['app','phone'],st:'ok',hit:670,chunk:29,by:'刘思雨',up:'2026-06-09 14:55'},
+  {n:'实时公交小程序使用帮助',type:'md',tags:['实时公交'],ch:['app'],st:'draft',hit:0,chunk:0,by:'赵建国',up:'2026-06-08 15:30'},
+  {n:'语音热线常用应答话术库',type:'doc',tags:['乘车规则','投诉建议'],ch:['phone'],st:'ok',hit:2160,chunk:74,by:'王明辉',up:'2026-06-17 10:20'}
 ];
 const kbStMap = {ok:['p-green','已发布'],parsing:['p-blue','解析中'],fail:['p-red','解析失败'],draft:['p-gray','草稿']};
 const fileIco = {xls:'file-spreadsheet',doc:'file-text',pdf:'file-text',md:'file-code'};
+const kbChLabel = {app:'APP 智能客服中心',phone:'AI 电话客服系统'};
+let curKbCh='all'; // 'all' | 'app' | 'phone' — 知识库页当前渠道筛选
 
 const issues = [
-  {q:'公交卡里的余额可以退到微信吗？怎么操作？',co:'大连公交集团',init:'连',cat:'优惠卡办理',cnt:148,last:'2 小时前',st:'open',
+  {q:'公交卡里的余额可以退到微信吗？怎么操作？',co:'大连公交',init:'连',cat:'优惠卡办理',ch:'app',cnt:148,last:'2 小时前',st:'open',
    sim:['公交卡退卡余额能退微信吗','卡里剩的钱怎么退出来','押金和余额退到哪'],
    reason:'知识库中仅有「办卡流程」，缺少退卡与余额退还的具体渠道、手续费和到账时效说明，导致智能体无法给出明确答复。',
    draft:'退卡余额可在任一公交营业网点办理，余额原路退还至<b>银行卡或微信</b>，单笔退卡收取 <b>2 元</b> 工本费，到账时效 <b>1–3 个工作日</b>。卡内押金（20 元）在卡片完好情况下全额退还。'},
-  {q:'XX路公交车末班车几点？周末和工作日一样吗？',co:'北京公交集团',init:'京',cat:'运营时刻',cnt:96,last:'4 小时前',st:'open',
+  {q:'XX路公交车末班车几点？周末和工作日一样吗？',co:'哈尔滨公交',init:'哈',cat:'运营时刻',ch:'phone',cnt:96,last:'4 小时前',st:'open',
    sim:['末班车时间','周末班次和平时一样吗','最晚一班几点发车'],
    reason:'现有时刻表知识库未区分「工作日 / 双休日 / 节假日」三种运营计划，智能体对周末班次问题召回不到对应内容。',
    draft:'建议补充分场景时刻表：多数干线工作日运营 <b>05:30–22:30</b>，双休日首末班各延后 30 分钟；节假日执行专项计划。可上传《分日历类型班次时刻表》结构化数据。'},
-  {q:'乘车时突发疾病/晕倒了，司机会怎么处理？',co:'上海巴士集团',init:'申',cat:'乘车规则',cnt:54,last:'今天 11:20',st:'open',
+  {q:'乘车时突发疾病/晕倒了，司机会怎么处理？',co:'琴岛公交',init:'琴',cat:'乘车规则',ch:'phone',cnt:54,last:'今天 11:20',st:'open',
    sim:['车上有人晕倒怎么办','突发情况司机如何处理','车上能叫救护车吗'],
    reason:'属于应急处置类问题，知识库无对应预案内容，建议联动安全运营部门补充标准化应急流程。',
    draft:'补充《车厢突发事件处置指引》：司机将就近安全停靠、协助拨打 120、通知调度中心，并优先保障乘客安全。可标注为「应急处置」高优先级类目。'},
-  {q:'我把伞落在车上了，去哪里找？要带什么证件？',co:'大连公交集团',init:'连',cat:'失物招领',cnt:43,last:'今天 09:05',st:'open',
+  {q:'我把伞落在车上了，去哪里找？要带什么证件？',co:'大连公交',init:'连',cat:'失物招领',ch:'app',cnt:43,last:'今天 09:05',st:'open',
    sim:['东西落公交车上怎么办','失物去哪领','认领需要什么手续'],
    reason:'失物招领须知已上传，但缺少「按线路 / 车队对应的招领点联系方式」，无法给出具体地点。',
    draft:'补充各车队失物招领点的<b>地址与电话</b>对照表，并说明认领需携带<b>本人身份证</b>、描述物品特征，遗失当日可拨打各线路所属车队电话登记。'},
-  {q:'能不能用数字人民币 / 云闪付坐公交？',co:'广州公交集团',init:'穗',cat:'票价政策',cnt:38,last:'昨天 16:40',st:'open',
+  {q:'能不能用数字人民币 / 云闪付坐公交？',co:'长春公交',init:'春',cat:'票价政策',ch:'app',cnt:38,last:'昨天 16:40',st:'open',
    sim:['支持数字人民币吗','云闪付能刷吗','除了微信还能怎么付'],
    reason:'支付方式说明仅覆盖现金、交通卡、微信/支付宝，未包含数字人民币及云闪付，需更新支付渠道清单。',
    draft:'更新《支持的支付方式》清单，明确是否支持<b>数字人民币、云闪付、银联闪付</b>及对应使用方式；如暂不支持也应明确告知，避免误导。'},
-  {q:'残疾人 / 现役军人乘车有什么优惠？怎么认证？',co:'武汉公交集团',init:'江',cat:'优惠卡办理',cnt:31,last:'昨天 14:10',st:'open',
+  {q:'残疾人 / 现役军人乘车有什么优惠？怎么认证？',co:'淮安公交',init:'淮',cat:'优惠卡办理',ch:'phone',cnt:31,last:'昨天 14:10',st:'open',
    sim:['军人坐公交免费吗','残疾证能免票吗','优待证怎么办'],
    reason:'优惠政策知识库覆盖老年卡、学生卡，缺少残疾人、军人、退役军人等特殊群体优待政策。',
    draft:'补充《特殊群体乘车优待政策》：明确残疾人、现役/退役军人、消防救援人员等的<b>免费/半价范围、所需证件及认证方式</b>。'}
 ];
 const issueStMap={open:['p-orange','待处理'],doing:['p-blue','处理中'],done:['p-green','已解决'],ignore:['p-gray','已忽略']};
+const issueChLabel={app:'APP 智能客服中心',phone:'AI 电话客服系统'};
+let curIssueCh='all'; // 'all' | 'app' | 'phone' — 疑难问题页当前渠道筛选
 
 /* ---------------- HELPERS ---------------- */
 const $=s=>document.querySelector(s);
 function icons(){if(window.lucide)lucide.createIcons();}
 function fmt(n){return n.toLocaleString('en-US');}
 
+/* ---------------- DROPDOWN ---------------- */
+function toggleDd(ddId, btn){
+  const isOpen = btn.classList.contains('open');
+  document.querySelectorAll('.fbtn.open').forEach(b=>b.classList.remove('open'));
+  if(!isOpen) btn.classList.add('open');
+}
+function setFbtn(btnId, lblId, ddId, item, val){
+  document.getElementById(lblId).textContent = val;
+  document.querySelectorAll('#'+ddId+' .dd-item').forEach(i=>i.classList.remove('on'));
+  item.classList.add('on');
+  document.getElementById(btnId).classList.remove('open');
+}
+document.addEventListener('click', e=>{
+  if(!e.target.closest('.fbtn')) document.querySelectorAll('.fbtn.open').forEach(b=>b.classList.remove('open'));
+});
+
 /* ---------------- DASHBOARD ---------------- */
 const kpiData=[
-  {ico:'building-2',l:'接入公司',v:'8',u:'家',d:1,dv:'+1',vs:'较上月'},
+  {ico:'building-2',l:'接入公司',v:'9',u:'家',d:1,dv:'+1',vs:'较上月'},
   {ico:'messages-square',l:'本月问答数',v:'14.29',u:'万',d:1,dv:'+12.4%',vs:'环比'},
   {ico:'cpu',l:'Token 消耗',v:'38.6',u:'M',d:1,dv:'+9.1%',vs:'环比'},
+  {ico:'timer',l:'平均通话时长',v:"1'38\"",u:'',d:0,dv:'-4s',vs:'环比'},
   {ico:'circle-check-big',l:'平均解决率',v:'91.2',u:'%',d:1,dv:'+1.8%',vs:'环比'},
-  {ico:'message-square-warning',l:'待处理疑难',v:'47',u:'',d:0,dv:'-6',vs:'较上周'}
+  {ico:'message-square-warning',l:'未命中意图',v:'47',u:'',d:0,dv:'-6',vs:'较上周'},
+  {ico:'shield-alert',l:'兜底触发次数',v:'3,241',u:'',d:0,dv:'+182',vs:'较上周'},
+  {ico:'percent',l:'兜底触发率',v:'2.27',u:'%',d:0,dv:'+0.12%',vs:'环比'},
+  {ico:'trending-down',l:'兜底已优化减少',v:'18.4',u:'%',d:1,dv:'-18.4%',vs:'较上月'}
 ];
 function renderKpis(){
   $('#kpis').innerHTML=kpiData.map(k=>`
@@ -640,58 +785,98 @@ function renderDashIssues(){
 }
 
 /* ---------------- AGENTS ---------------- */
+function renderAgentThead(){
+  $('#agentThead').innerHTML = curAgentCh==='app'
+    ? `<th>公司</th><th>智能体</th><th>状态</th><th>模型</th><th>知识库</th><th class="right">累积问答</th><th class="right">Token 消耗</th><th>解决率</th><th>更新时间</th>`
+    : `<th>公司</th><th>智能体</th><th>状态</th><th>模型</th><th>知识库</th><th class="right">累积通话</th><th class="right">平均通话时长</th><th>解决率</th><th>更新时间</th>`;
+}
+function setAgentCh(ch){
+  curAgentCh=ch;
+  document.querySelectorAll('#agentChTab button').forEach(b=>b.classList.toggle('on',b.dataset.ch===ch));
+  renderAgentThead();renderAgents();icons();
+}
 function renderAgents(){
+  renderAgentThead();
   $('#agentRows').innerHTML=companies.map((c,i)=>{
-    const s=stMap[c.st];
+    const d=c[curAgentCh],s=stMap[d.st];
+    const metricCell = curAgentCh==='app'
+      ? `<td class="right num cell-main">${d.q?fmt(d.q):'—'}</td><td class="right num cell-main">${d.tokens?d.tokens.toFixed(1)+' M':'—'}</td>`
+      : `<td class="right num cell-main">${d.calls?fmt(d.calls):'—'}</td><td class="right num cell-main">${fmtDur(d.avgDur)}</td>`;
     return `<tr class="row-link" onclick="openAgent(${i})">
-      <td><div class="co">
-        <div class="co-logo" style="background:${coColor[i]}">${c.init}</div>
-        <div><div class="cell-main">${c.n}</div><div class="cell-sub">${c.a}</div></div>
-      </div></td>
+      <td><div class="cell-main">${c.n}</div></td>
+      <td><div class="cell-sub" style="color:var(--ink)">${d.a}</div></td>
       <td><span class="pill ${s[0]}"><span class="pdot" style="background:currentColor"></span>${s[1]}</span></td>
-      <td><span class="tag">${c.m}</span></td>
+      <td><span class="tag">${d.m}</span></td>
       <td class="num">${c.kb} 个文档</td>
-      <td class="right num cell-main">${c.q?fmt(c.q):'—'}</td>
-      <td>${c.rate?`<div class="meter"><div class="track"><i style="width:${c.rate}%;background:${c.rate>92?'var(--green)':c.rate>89?'var(--blue)':'var(--orange)'}"></i></div><span class="num" style="font-weight:600">${c.rate}%</span></div>`:'<span style="color:var(--ink-4)">—</span>'}</td>
-      <td style="color:var(--ink-3)">${c.up}</td>
-      <td class="right"><button class="icon-btn" onclick="event.stopPropagation()"><i data-lucide="ellipsis"></i></button></td>
+      ${metricCell}
+      <td>${d.rate?`<div class="meter"><div class="track"><i style="width:${d.rate}%;background:${d.rate>92?'var(--green)':d.rate>89?'var(--blue)':'var(--orange)'}"></i></div><span class="num" style="font-weight:600">${d.rate}%</span></div>`:'<span style="color:var(--ink-4)">—</span>'}</td>
+      <td style="color:var(--ink-3)">${d.up}</td>
     </tr>`;
   }).join('');
 }
 
 /* ---------------- KB ---------------- */
+function setKbCh(ch){
+  curKbCh=ch;
+  document.querySelectorAll('#kbChTab button').forEach(b=>b.classList.toggle('on',b.dataset.ch===ch));
+  renderKb();icons();
+}
 function renderKb(){
-  $('#kbRows').innerHTML=kbDocs.map(d=>{
+  const list = curKbCh==='all' ? kbDocs : kbDocs.filter(d=>d.ch.includes(curKbCh));
+  $('#kbRows').innerHTML=list.map(d=>{
     const s=kbStMap[d.st];
     return `<tr class="row-link">
-      <td><div class="co">
-        <div class="co-logo" style="background:#EBECF0;color:var(--ink-3);width:30px;height:30px"><i data-lucide="${fileIco[d.type]}"></i></div>
-        <div class="cell-main">${d.n}</div>
+      <td style="padding:12px 10px"><div class="co">
+        <div class="co-logo" style="background:#EBECF0;color:var(--ink-3);width:28px;height:28px;border-radius:6px;flex:0 0 28px"><i data-lucide="${fileIco[d.type]}" style="width:14px;height:14px"></i></div>
+        <div class="cell-main" style="font-size:13px">${d.n}</div>
       </div></td>
-      <td><div class="tags">${d.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></td>
-      <td><span class="pill ${s[0]}"><span class="pdot" style="background:currentColor"></span>${s[1]}</span></td>
-      <td class="right num cell-main">${d.hit?fmt(d.hit):'—'}</td>
-      <td class="num" style="color:var(--ink-3)">${d.chunk||'—'}</td>
-      <td style="color:var(--ink-2)">${d.by}</td>
-      <td style="color:var(--ink-3)">${d.up}</td>
-      <td class="right"><button class="icon-btn" onclick="event.stopPropagation()"><i data-lucide="ellipsis"></i></button></td>
+      <td style="padding:12px 8px"><div class="tags">${d.tags.map(t=>`<span class="tag" style="font-size:11.5px;padding:2px 7px">${t}</span>`).join('')}</div></td>
+      <td style="padding:12px 8px"><div class="tags">${d.ch.map(c=>`<span class="tag" style="font-size:11.5px;padding:2px 7px;background:${c==='app'?'var(--blue-soft)':'var(--purple-bg)'};border-color:transparent;color:${c==='app'?'var(--blue)':'var(--purple)'}">${kbChLabel[c]}</span>`).join('')}</div></td>
+      <td style="padding:12px 8px"><span class="pill ${s[0]}" style="font-size:12px;padding:3px 9px"><span class="pdot" style="background:currentColor"></span>${s[1]}</span></td>
+      <td class="right num cell-main" style="padding:12px 8px">${d.hit?fmt(d.hit):'—'}</td>
+      <td class="num" style="padding:12px 8px;color:var(--ink-3)">${d.chunk||'—'}</td>
+      <td style="padding:12px 8px;color:var(--ink-2);font-size:13px">${d.by}</td>
+      <td style="padding:12px 8px;color:var(--ink-3);font-size:12.5px;white-space:nowrap">${d.up}</td>
     </tr>`;
   }).join('');
+  const foot=$('#kbFootCount'); if(foot)foot.textContent=`共 ${list.length} 个文档`;
 }
 
 /* ---------------- ANALYTICS ---------------- */
-const anaKpi=[
-  {ico:'messages-square',l:'总问答数',v:'156,480',d:1,dv:'+12.4%'},
-  {ico:'users',l:'独立用户',v:'42,860',d:1,dv:'+8.7%'},
-  {ico:'cpu',l:'Token 消耗',v:'38.6 M',d:1,dv:'+9.1%'},
-  {ico:'timer',l:'平均响应',v:'1.34 s',d:0,dv:'-0.12s'},
-  {ico:'thumbs-up',l:'满意度',v:'4.6 / 5',d:1,dv:'+0.2'}
-];
+let curAnaCh='all'; // 'all' | 'app' | 'phone' — 使用分析页当前渠道
+const anaKpiSets={
+  all:[
+    {ico:'messages-square',l:'总问答 / 通话数',v:'194,320',d:1,dv:'+11.6%'},
+    {ico:'users',l:'独立用户',v:'50,510',d:1,dv:'+8.2%'},
+    {ico:'cpu',l:'Token 消耗',v:'38.6 M',d:1,dv:'+9.1%'},
+    {ico:'timer',l:'平均响应',v:'1.34 s',d:0,dv:'-0.12s'},
+    {ico:'thumbs-up',l:'满意度',v:'4.5 / 5',d:1,dv:'+0.18'}
+  ],
+  app:[
+    {ico:'messages-square',l:'总问答数',v:'156,480',d:1,dv:'+12.4%'},
+    {ico:'users',l:'独立用户',v:'42,860',d:1,dv:'+8.7%'},
+    {ico:'cpu',l:'Token 消耗',v:'38.6 M',d:1,dv:'+9.1%'},
+    {ico:'timer',l:'平均响应',v:'1.34 s',d:0,dv:'-0.12s'},
+    {ico:'thumbs-up',l:'满意度',v:'4.6 / 5',d:1,dv:'+0.2'}
+  ],
+  phone:[
+    {ico:'phone-call',l:'总通话次数',v:'37,840',d:1,dv:'+8.0%'},
+    {ico:'users',l:'独立来电用户',v:'7,650',d:1,dv:'+5.2%'},
+    {ico:'timer',l:'平均通话时长',v:fmtDur(98),d:0,dv:'-8s'},
+    {ico:'phone-incoming',l:'接通解决率',v:'87.4%',d:1,dv:'+1.3%'},
+    {ico:'thumbs-up',l:'满意度',v:'4.4 / 5',d:1,dv:'+0.15'}
+  ]
+};
 function renderAnaKpis(){
-  $('#anaKpis').innerHTML=anaKpi.map(k=>`
+  $('#anaKpis').innerHTML=anaKpiSets[curAnaCh].map(k=>`
     <div class="kpi"><div class="top"><span>${k.l}</span><div class="ico"><i data-lucide="${k.ico}"></i></div></div>
     <div class="val num">${k.v}</div>
     <span class="delta ${k.d?'up':'down'}"><i data-lucide="${k.d?'trending-up':'trending-down'}"></i>${k.dv}<span class="vs">环比</span></span></div>`).join('');
+}
+function setAnaCh(ch){
+  curAnaCh=ch;
+  document.querySelectorAll('#anaChTab button').forEach(b=>b.classList.toggle('on',b.dataset.ch===ch));
+  renderAnaKpis();renderTopQ();drawAnaCharts(true);icons();
 }
 const topQ=[
   ['XX路公交车什么时候来 / 还有几站',12840,'实时公交'],
@@ -706,6 +891,7 @@ const topQ=[
   ['怎么投诉司机/服务',1980,'投诉建议']
 ];
 function renderTopQ(){
+  const t=$('#topQTitle'); if(t)t.textContent = curAnaCh==='phone' ? '高频来电问题 TOP 10' : '高频问题 TOP 10';
   const max=topQ[0][1];
   $('#topQ').innerHTML=topQ.map((q,i)=>`
     <div class="lrow">
@@ -718,65 +904,179 @@ function renderTopQ(){
 }
 
 /* ---------------- ISSUES ---------------- */
-const issueKpi=[
-  {ico:'message-square-warning',l:'待处理疑难',v:'47',d:0,dv:'-6 较上周'},
-  {ico:'git-merge',l:'已归并提问',v:'1,284',d:1,dv:'本周 +213'},
-  {ico:'circle-check-big',l:'本月已闭环',v:'68',d:1,dv:'+24'},
-  {ico:'sparkles',l:'AI 建议采纳率',v:'82%',d:1,dv:'+5%'}
-];
+const issueKpiBase={
+  all:{cnt:'47',merged:'1,284',mv:'-6 较上周',mergedv:'本周 +213'},
+  app:{cnt:'29',merged:'812',mv:'-3 较上周',mergedv:'本周 +140'},
+  phone:{cnt:'18',merged:'472',mv:'-3 较上周',mergedv:'本周 +73'}
+};
+function issueKpiFor(ch){
+  const b=issueKpiBase[ch];
+  return [
+    {ico:'message-square-warning',l:'未命中意图',v:b.cnt,d:0,dv:b.mv},
+    {ico:'git-merge',l:'已归并提问',v:b.merged,d:1,dv:b.mergedv},
+    {ico:'circle-check-big',l:'本月已闭环',v:ch==='phone'?'24':ch==='app'?'44':'68',d:1,dv:'+24'},
+    {ico:'sparkles',l:'AI 建议采纳率',v:'82%',d:1,dv:'+5%'}
+  ];
+}
 function renderIssueKpis(){
-  $('#issueKpis').innerHTML=issueKpi.map(k=>`
+  $('#issueKpis').innerHTML=issueKpiFor(curIssueCh).map(k=>`
     <div class="kpi"><div class="top"><span>${k.l}</span><div class="ico" style="${k.ico==='sparkles'?'background:var(--purple-bg);color:var(--purple)':''}"><i data-lucide="${k.ico}"></i></div></div>
     <div class="val num">${k.v}</div>
     <span class="delta ${k.d?'up':'down'}"><i data-lucide="${k.d?'trending-up':'check'}"></i>${k.dv}</span></div>`).join('');
 }
+function setIssueCh(ch){
+  curIssueCh=ch;
+  document.querySelectorAll('#issueChTab button').forEach(b=>b.classList.toggle('on',b.dataset.ch===ch));
+  renderIssueKpis();renderIssues();icons();
+}
 function renderIssues(){
-  $('#issueRows').innerHTML=issues.map((it,i)=>{
+  const list = curIssueCh==='all' ? issues : issues.filter(it=>it.ch===curIssueCh);
+  $('#issueRows').innerHTML=list.map((it)=>{
+    const i=issues.indexOf(it);
     const s=issueStMap[it.st];
     return `<tr class="row-link" onclick="openIssueIdx(${i})">
       <td><div class="cell-main">${it.q}</div><div class="cell-sub">已归并 ${it.sim.length+1} 类相似提问</div></td>
-      <td><div class="co"><div class="co-logo" style="width:26px;height:26px;font-size:11px;background:${coColor[companies.findIndex(c=>c.n===it.co)]}">${it.init}</div><span style="font-size:12.5px">${it.co}</span></div></td>
+      <td><span style="font-size:12.5px">${it.co}</span></td>
       <td><span class="tag">${it.cat}</span></td>
+      <td><span class="tag" style="background:${it.ch==='app'?'var(--blue-soft)':'var(--purple-bg)'};border-color:transparent;color:${it.ch==='app'?'var(--blue)':'var(--purple)'}">${issueChLabel[it.ch]}</span></td>
       <td class="right num cell-main" style="font-size:15px">${it.cnt}</td>
       <td style="color:var(--ink-3)">${it.last}</td>
       <td><span class="pill ${s[0]}"><span class="pdot" style="background:currentColor"></span>${s[1]}</span></td>
-      <td class="right"><i data-lucide="chevron-right" style="color:var(--ink-4);width:16px"></i></td>
     </tr>`;
   }).join('');
+  const foot=$('#issueFootCount'); if(foot)foot.textContent=`待处理 · 共 ${list.length} 个未命中意图`;
+}
+
+/* ---------------- OPT LIST ---------------- */
+function genOptList(){
+  const optItems=[
+    {rank:1,pri:'high',cat:'支付与充值',co:'长春公交',cnt:148+38,
+     title:'补充多元支付方式与余额退款说明',
+     gap:'知识库仅覆盖现金、交通卡、微信/支付宝，缺失数字人民币、云闪付场景；退卡余额退款流程、到账时效、工本费均未收录，导致两类高频问题无法答复。',
+     action:'1. 更新《支持支付方式清单》，明确数字人民币、云闪付、银联闪付及绑卡步骤。\n2. 新增《退卡余额退款指南》：网点范围、所需材料、收费标准（2元工本费）、到账时效（1–3工作日）。',
+     est:186,tag:'知识库补充'},
+    {rank:2,pri:'high',cat:'运营时刻',co:'哈尔滨公交',cnt:96,
+     title:'按日历类型拆分时刻表结构',
+     gap:'现有时刻表为平面结构，未区分「工作日 / 双休日 / 法定节假日」三类运营计划，智能体无法匹配周末及节假日班次查询。',
+     action:'1. 将时刻表拆分为三份独立文档（工作日、双休日、节假日）并打标签。\n2. 或在现有文档中增加「日历说明」章节，注明首末班时间差异（如干线双休日首末班各延后30分钟）。',
+     est:96,tag:'知识库重构'},
+    {rank:3,pri:'mid',cat:'乘车规则',co:'琴岛公交',cnt:54,
+     title:'新增车厢应急处置标准流程',
+     gap:'突发疾病、晕倒等应急处置场景在知识库中完全缺失，属于高风险答复盲区，用户得不到有效指引。',
+     action:'1. 联系安全运营部获取《车厢突发事件处置规程》。\n2. 整理为FAQ格式上传，标注「应急处置」标签，建议设为高优先级召回。',
+     est:54,tag:'新增文档'},
+    {rank:4,pri:'mid',cat:'失物招领',co:'大连公交',cnt:43,
+     title:'补全各车队招领点联系方式',
+     gap:'失物招领须知已上传，但缺少「按线路/车队」对应的具体招领地点、电话及受理时间，用户无法落地操作。',
+     action:'1. 整理各车队失物招领点地址、电话、受理时间，制成对照表上传。\n2. 在原失物须知中增加「联系方式速查」章节并更新。',
+     est:43,tag:'知识库更新'},
+    {rank:5,pri:'low',cat:'优惠政策',co:'淮安公交',cnt:31,
+     title:'补充特殊群体乘车优待政策',
+     gap:'现有优惠政策仅覆盖老年卡、学生卡，残疾人、现役/退役军人、消防救援等特殊群体的免费/半价政策、所需证件及认证方式未收录。',
+     action:'1. 向运营部或政策部门获取《特殊群体乘车优待政策》正式文件。\n2. 整理各类群体的免费/半价范围、证件要求、认证渠道，结构化上传并打「优惠政策」标签。',
+     est:31,tag:'新增文档'},
+  ];
+  const priLabel={high:['#C9372C','高优先'],mid:['#974F0C','中优先'],low:['#1F845A','低优先']};
+  const totalEst=optItems.reduce((s,i)=>s+i.est,0);
+  const html=`
+<div style="display:flex;flex-direction:column;height:100vh">
+  <div style="padding:24px 24px 18px;border-bottom:1px solid var(--color-border);flex-shrink:0">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
+      <div>
+        <div style="font-size:11px;font-weight:600;color:var(--color-brand);letter-spacing:.6px;text-transform:uppercase;margin-bottom:6px">AI 生成 · 2026-07-01</div>
+        <h2 style="font-size:18px;font-weight:700;color:var(--ink);margin:0 0 4px">本周知识库优化清单</h2>
+        <div style="font-size:13px;color:var(--ink-3)">基于 47 条未命中意图聚类分析，共识别 5 项优化方向</div>
+      </div>
+      <button class="icon-btn x" onclick="closeDrawer()" style="flex-shrink:0;margin-top:2px"><i data-lucide="x"></i></button>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px">
+      <div style="background:var(--canvas);border:1px solid var(--color-border);border-radius:10px;padding:12px 14px;text-align:center">
+        <div style="font-size:11px;color:var(--ink-3);margin-bottom:4px">未命中意图</div>
+        <div class="num" style="font-size:22px;font-weight:700;color:var(--ink)">47</div>
+      </div>
+      <div style="background:var(--canvas);border:1px solid var(--color-border);border-radius:10px;padding:12px 14px;text-align:center">
+        <div style="font-size:11px;color:var(--ink-3);margin-bottom:4px">可优化 KB 项</div>
+        <div class="num" style="font-size:22px;font-weight:700;color:var(--ink)">5</div>
+      </div>
+      <div style="background:#EEF4FF;border:1px solid #C5D8FF;border-radius:10px;padding:12px 14px;text-align:center">
+        <div style="font-size:11px;color:var(--color-brand);margin-bottom:4px">预计可拦截</div>
+        <div class="num" style="font-size:22px;font-weight:700;color:var(--color-brand)">${totalEst}</div>
+      </div>
+    </div>
+  </div>
+  <div style="flex:1;overflow-y:auto;padding:20px 24px;display:flex;flex-direction:column;gap:14px">
+    ${optItems.map(it=>{
+      const [priColor,priText]=priLabel[it.pri];
+      return `<div style="border:1px solid var(--color-border);border-radius:12px;overflow:hidden">
+        <div style="padding:14px 16px 12px;background:var(--white)">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+            <span style="font-size:11px;font-weight:700;background:${priColor}20;color:${priColor};border-radius:6px;padding:2px 8px">${priText}</span>
+            <span style="font-size:11px;color:var(--ink-3)">${it.tag}</span>
+            <span style="margin-left:auto;font-size:11px;color:var(--ink-4)">涉及 ${it.co} · ${it.cat}</span>
+          </div>
+          <div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:8px">No.${it.rank} &nbsp;${it.title}</div>
+          <div style="font-size:12.5px;color:var(--ink-3);line-height:1.6;padding:10px 12px;background:var(--canvas);border-radius:8px;margin-bottom:10px">
+            <span style="font-weight:600;color:var(--ink-2)">缺口说明：</span>${it.gap}
+          </div>
+          <div style="font-size:12.5px;color:var(--ink-2);line-height:1.8;white-space:pre-wrap">${it.action}</div>
+        </div>
+        <div style="padding:10px 16px;background:var(--canvas);border-top:1px solid var(--color-border);display:flex;align-items:center;justify-content:space-between">
+          <span style="font-size:12px;color:var(--ink-3)">补充后预计可拦截 <b class="num" style="color:var(--ink)">${it.est}</b> 条同类提问</span>
+          <button class="btn" style="height:28px;font-size:12px;padding:0 12px" onclick="go('kb');closeDrawer()"><i data-lucide="arrow-right"></i>去知识库处理</button>
+        </div>
+      </div>`;
+    }).join('')}
+    <div style="padding:16px;background:var(--canvas);border:1px dashed var(--color-border);border-radius:12px;font-size:12.5px;color:var(--ink-3);line-height:1.7">
+      <b style="color:var(--ink-2)">建议工作流：</b>将上述优化项导出为工单 → 分发至各公司知识库编辑 → 编辑完成后提交平台审核 → 审核通过后自动生效并观察次周未命中率变化。
+    </div>
+  </div>
+  <div style="padding:16px 24px;border-top:1px solid var(--color-border);display:flex;gap:10px;flex-shrink:0">
+    <button class="btn" style="flex:1" onclick="closeDrawer()">关闭</button>
+    <button class="btn primary" style="flex:2"><i data-lucide="download"></i>导出优化清单 PDF</button>
+  </div>
+</div>`;
+  openDrawer(html);
 }
 
 /* ---------------- DRAWER ---------------- */
 function openDrawer(html){$('#drawerInner').innerHTML=html;$('#scrim').classList.add('show');$('#drawer').classList.add('show');icons();}
 function closeDrawer(){$('#scrim').classList.remove('show');$('#drawer').classList.remove('show');}
 
-function openAgent(i){
-  const c=companies[i],s=stMap[c.st];
+function openAgent(i,ch){
+  ch=ch||curAgentCh;
+  const c=companies[i],d=c[ch],s=stMap[d.st],isApp=ch==='app';
+  const metricsKpis = isApp
+    ? `<div class="kpi" style="padding:13px"><div class="top"><span>本月问答数</span></div><div class="val num" style="font-size:21px">${d.q?fmt(d.q):'—'}</div></div>
+       <div class="kpi" style="padding:13px"><div class="top"><span>Token 消耗</span></div><div class="val num" style="font-size:21px">${d.tokens?d.tokens.toFixed(1)+' M':'—'}</div></div>
+       <div class="kpi" style="padding:13px"><div class="top"><span>未命中意图</span></div><div class="val num" style="font-size:21px">${d.st==='off'?'—':Math.round(d.q/2600)}</div></div>`
+    : `<div class="kpi" style="padding:13px"><div class="top"><span>本月通话数</span></div><div class="val num" style="font-size:21px">${d.calls?fmt(d.calls):'—'}</div></div>
+       <div class="kpi" style="padding:13px"><div class="top"><span>平均通话时长</span></div><div class="val num" style="font-size:21px">${fmtDur(d.avgDur)}</div></div>
+       <div class="kpi" style="padding:13px"><div class="top"><span>未命中意图</span></div><div class="val num" style="font-size:21px">${d.st==='off'?'—':Math.round(d.calls/650)}</div></div>`;
   openDrawer(`
     <div class="dr-head">
       <div class="co-logo" style="width:46px;height:46px;font-size:18px;background:${coColor[i]}">${c.init}</div>
-      <div><div style="font-size:17px;font-weight:700">${c.a}</div>
-        <div style="color:var(--ink-3);font-size:13px;margin-top:2px">${c.n} · 专属智能体</div></div>
+      <div><div style="font-size:17px;font-weight:700">${d.a}</div>
+        <div style="color:var(--ink-3);font-size:13px;margin-top:2px">${c.n} · ${isApp?'APP 智能客服中心':'AI 电话客服系统'}</div></div>
       <button class="icon-btn x" onclick="closeDrawer()"><i data-lucide="x"></i></button>
     </div>
     <div class="dr-body">
       <div class="detail-banner">
         <span class="pill ${s[0]}" style="font-size:12px;padding:5px 10px"><span class="pdot" style="background:currentColor"></span>${s[1]}</span>
         <div style="flex:1"></div>
-        <div style="text-align:right"><div class="cell-sub">本月解决率</div><div class="num" style="font-size:18px;font-weight:700;color:${c.rate>92?'var(--green)':'var(--ink)'}">${c.rate||'—'}%</div></div>
+        <div style="text-align:right"><div class="cell-sub">本月解决率</div><div class="num" style="font-size:18px;font-weight:700;color:${d.rate>92?'var(--green)':'var(--ink)'}">${d.rate||'—'}%</div></div>
       </div>
       <div class="dr-sec"><div class="t">智能体配置</div>
         <div class="qcard" style="margin:0">
-          <div class="field"><span class="k">对接大模型</span><span class="v">${c.m}</span></div>
-          <div class="field"><span class="k">知识库范围</span><span class="v">${c.kb} 个文档 · 仅本公司</span></div>
-          <div class="field"><span class="k">欢迎语</span><span class="v">您好，我是${c.a}，可咨询线路、票价、办卡等问题</span></div>
-          <div class="field"><span class="k">接入渠道</span><span class="v">微信公众号 · 小程序 · 95128 热线</span></div>
+          <div class="field"><span class="k">对接大模型</span><span class="v">${d.m}</span></div>
+          <div class="field"><span class="k">知识库范围</span><span class="v">${c.kb} 个文档 · 仅本公司 · APP / 电话渠道共用</span></div>
+          <div class="field"><span class="k">欢迎语</span><span class="v">您好，我是${d.a}，可咨询线路、票价、办卡等问题</span></div>
+          <div class="field"><span class="k">接入渠道</span><span class="v">${isApp?'微信公众号 · 小程序':'95128 语音热线'}</span></div>
           <div class="field"><span class="k">人工转接</span><span class="v">已开启 · 连续 2 次未解决转人工</span></div>
         </div>
       </div>
       <div class="dr-sec"><div class="t">本月运行数据</div>
-        <div class="kpis" style="grid-template-columns:1fr 1fr;gap:10px">
-          <div class="kpi" style="padding:13px"><div class="top"><span>问答数</span></div><div class="val num" style="font-size:21px">${c.q?fmt(c.q):'—'}</div></div>
-          <div class="kpi" style="padding:13px"><div class="top"><span>疑难问题</span></div><div class="val num" style="font-size:21px">${c.st==='off'?'—':Math.round(c.q/2600)}</div></div>
+        <div class="kpis" style="grid-template-columns:1fr 1fr 1fr;gap:10px">
+          ${metricsKpis}
         </div>
       </div>
     </div>
@@ -790,9 +1090,9 @@ function buildIssueDrawer(it){
   const sims=[it.q,...it.sim];
   return `
     <div class="dr-head">
-      <div class="co-logo" style="width:44px;height:44px;background:var(--orange-bg);color:var(--orange)"><i data-lucide="message-square-warning"></i></div>
+      <div class="co-logo" style="width:44px;height:44px;border-radius:8px;background:var(--orange-bg);color:var(--orange)"><i data-lucide="message-square-warning"></i></div>
       <div style="flex:1"><div style="font-size:16px;font-weight:700;line-height:1.4">${it.q}</div>
-        <div style="color:var(--ink-3);font-size:12.5px;margin-top:4px">${it.co} · ${it.cat} · 出现 ${it.cnt} 次</div></div>
+        <div style="color:var(--ink-3);font-size:12.5px;margin-top:4px">${it.co} · ${it.cat} · ${issueChLabel[it.ch]} · 出现 ${it.cnt} 次</div></div>
       <button class="icon-btn x" onclick="closeDrawer()"><i data-lucide="x"></i></button>
     </div>
     <div class="dr-body">
@@ -847,38 +1147,59 @@ function drawCharts(){
   new Chart($('#typeChart'),{type:'doughnut',data:{labels:tLabels,datasets:[{data:tData,backgroundColor:COLORS,borderWidth:2,borderColor:'#fff',hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,cutout:'68%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.label}：${c.raw}%`},backgroundColor:'#172B4D',padding:10,cornerRadius:8}}}});
   $('#typeLegend').innerHTML=tLabels.map((l,i)=>`<li><span class="dot" style="background:${COLORS[i]}"></span><span class="nm">${l}</span><span class="pc num">${tData[i]}%</span></li>`).join('');
 
-  const cos=companies.filter(c=>c.q>0).sort((a,b)=>b.q-a.q);
-  new Chart($('#coChart'),{type:'bar',data:{labels:cos.map(c=>c.n.replace('公交集团','').replace('巴士集团','')),datasets:[{data:cos.map(c=>c.q),backgroundColor:'#1868DB',borderRadius:5,barThickness:18}]},options:{...baseOpts(),indexAxis:'y',scales:{x:{grid:{color:'#EDEFF2'},ticks:{color:'#8993A4',font:{size:10},callback:v=>v/1000+'k'},border:{display:false}},y:{grid:{display:false},ticks:{color:'#44546F',font:{size:11.5}},border:{display:false}}}}});
+  const cos=companies.filter(c=>c.app.q>0).sort((a,b)=>b.app.q-a.app.q);
+  new Chart($('#coChart'),{type:'bar',data:{labels:cos.map(c=>c.n.replace('公交集团','').replace('巴士集团','')),datasets:[{data:cos.map(c=>c.app.q),backgroundColor:'#1868DB',borderRadius:5,barThickness:18}]},options:{...baseOpts(),indexAxis:'y',scales:{x:{grid:{color:'#EDEFF2'},ticks:{color:'#8993A4',font:{size:10},callback:v=>v/1000+'k'},border:{display:false}},y:{grid:{display:false},ticks:{color:'#44546F',font:{size:11.5}},border:{display:false}}}}});
 }
-function drawAnaCharts(){
-  if(window._ana||!window.Chart)return;window._ana=true;
+const anaChartInstances={};
+function destroyAnaCharts(){
+  Object.values(anaChartInstances).forEach(c=>c&&c.destroy());
+}
+function drawAnaCharts(force){
+  if((window._ana&&!force)||!window.Chart)return;window._ana=true;
+  destroyAnaCharts();
+  const ch=curAnaCh;
+  const isPhone=ch==='phone';
   const days=Array.from({length:30},(_,i)=>`${i+1}`);
-  const q=days.map((_,i)=>4200+Math.round(1100*Math.sin(i/4)+Math.random()*500));
-  const tok=q.map(v=>Math.round(v*250+Math.random()*40000));
-  new Chart($('#anaTrend'),{data:{labels:days,datasets:[
-    {type:'bar',label:'问答数',data:q,backgroundColor:'#C1D4F0',borderRadius:4,yAxisID:'y',barThickness:9},
-    {type:'line',label:'Token',data:tok,borderColor:'#6554C0',borderWidth:2,tension:.4,pointRadius:0,yAxisID:'y1'}]},
+
+  /* ---- panel 1: 问答/通话量 + Token / 平均时长 双轴趋势 ---- */
+  $('#anaTrendTitle').textContent = isPhone ? '通话量与平均通话时长' : '问答量与 Token 消耗';
+  const primary=days.map((_,i)=>(isPhone?900:4200)+Math.round((isPhone?260:1100)*Math.sin(i/4)+Math.random()*(isPhone?180:500)));
+  const secondary=isPhone
+    ? primary.map(()=>80+Math.round(Math.random()*40))
+    : primary.map(v=>Math.round(v*250+Math.random()*40000));
+  anaChartInstances.trend=new Chart($('#anaTrend'),{data:{labels:days,datasets:[
+    {type:'bar',label:isPhone?'通话数':'问答数',data:primary,backgroundColor:isPhone?'#E4D9F7':'#C1D4F0',borderRadius:4,yAxisID:'y',barThickness:9},
+    {type:'line',label:isPhone?'平均时长(s)':'Token',data:secondary,borderColor:isPhone?'#5E4DB2':'#6554C0',borderWidth:2,tension:.4,pointRadius:0,yAxisID:'y1'}]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'top',align:'end',labels:{boxWidth:10,boxHeight:10,font:{size:11.5},color:'#5E6C84',usePointStyle:true}},tooltip:{backgroundColor:'#172B4D',padding:10,cornerRadius:8}},
     scales:{x:{grid:{display:false},ticks:{color:'#8993A4',font:{size:10}},border:{display:false}},
     y:{grid:{color:'#EDEFF2'},ticks:{color:'#8993A4',font:{size:10}},border:{display:false}},
-    y1:{position:'right',grid:{display:false},ticks:{color:'#8993A4',font:{size:10},callback:v=>v/1e6+'M'},border:{display:false}}}}});
+    y1:{position:'right',grid:{display:false},ticks:{color:'#8993A4',font:{size:10},callback:v=>isPhone?v+'s':v/1e6+'M'},border:{display:false}}}}});
 
+  /* ---- panel 2: 各时段咨询/来电热度 ---- */
+  $('#hourTitle').textContent = isPhone ? '各时段来电热度' : '各时段咨询热度';
   const hrs=Array.from({length:24},(_,i)=>i+'时');
-  const peak=[1,.6,.4,.3,.3,.6,2,5,8,7,6.5,7,8.5,6,5.5,6,7,8,7.5,6,4,3,2,1.4].map(v=>Math.round(v*620));
-  new Chart($('#hourChart'),{type:'bar',data:{labels:hrs,datasets:[{data:peak,backgroundColor:c=>{const v=c.raw;return v>4000?'#1868DB':v>2500?'#4C9AFF':'#8FB8FF';},borderRadius:3,barThickness:9}]},options:{...baseOpts(),scales:{x:{grid:{display:false},ticks:{color:'#8993A4',font:{size:9},maxRotation:0,callback:(v,i)=>i%3===0?hrs[i]:''},border:{display:false}},y:{grid:{color:'#EDEFF2'},ticks:{color:'#8993A4',font:{size:10}},border:{display:false}}}}});
+  const peakBase=[1,.6,.4,.3,.3,.6,2,5,8,7,6.5,7,8.5,6,5.5,6,7,8,7.5,6,4,3,2,1.4];
+  const peak=peakBase.map(v=>Math.round(v*(isPhone?150:620)));
+  anaChartInstances.hour=new Chart($('#hourChart'),{type:'bar',data:{labels:hrs,datasets:[{data:peak,backgroundColor:c=>{const v=c.raw;const hi=isPhone?1000:4000,mid=isPhone?620:2500;return v>hi?(isPhone?'#5E4DB2':'#1868DB'):v>mid?(isPhone?'#9C8BE0':'#4C9AFF'):(isPhone?'#D7CCF2':'#8FB8FF');},borderRadius:3,barThickness:9}]},options:{...baseOpts(),scales:{x:{grid:{display:false},ticks:{color:'#8993A4',font:{size:9},maxRotation:0,callback:(v,i)=>i%3===0?hrs[i]:''},border:{display:false}},y:{grid:{color:'#EDEFF2'},ticks:{color:'#8993A4',font:{size:10}},border:{display:false}}}}});
 
+  /* ---- panel 3 (KPI/list handled by renderTopQ) ---- */
+
+  /* ---- panel 4: 满意度 + 解决率 / 接通率 ---- */
+  $('#satTitle').textContent = isPhone ? '满意度与接通解决率' : '满意度与解决率';
   const months=['1月','2月','3月','4月','5月','6月'];
-  new Chart($('#satChart'),{data:{labels:months,datasets:[
-    {type:'line',label:'解决率 %',data:[87.2,88.5,89.1,90.4,90.8,91.2],borderColor:'#1F845A',backgroundColor:'rgba(31,132,90,.08)',fill:true,borderWidth:2,tension:.4,pointRadius:3,pointBackgroundColor:'#1F845A',yAxisID:'y'},
-    {type:'line',label:'满意度',data:[4.3,4.35,4.4,4.5,4.55,4.6],borderColor:'#1868DB',borderWidth:2,tension:.4,pointRadius:3,pointBackgroundColor:'#1868DB',yAxisID:'y1'}]},
+  const rateData = isPhone ? [82.4,83.6,84.8,86.0,86.7,87.4] : [87.2,88.5,89.1,90.4,90.8,91.2];
+  const satData = isPhone ? [4.1,4.15,4.2,4.3,4.35,4.4] : [4.3,4.35,4.4,4.5,4.55,4.6];
+  anaChartInstances.sat=new Chart($('#satChart'),{data:{labels:months,datasets:[
+    {type:'line',label:isPhone?'接通解决率 %':'解决率 %',data:rateData,borderColor:'#1F845A',backgroundColor:'rgba(31,132,90,.08)',fill:true,borderWidth:2,tension:.4,pointRadius:3,pointBackgroundColor:'#1F845A',yAxisID:'y'},
+    {type:'line',label:'满意度',data:satData,borderColor:'#1868DB',borderWidth:2,tension:.4,pointRadius:3,pointBackgroundColor:'#1868DB',yAxisID:'y1'}]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'top',align:'end',labels:{boxWidth:10,font:{size:11.5},color:'#5E6C84',usePointStyle:true}},tooltip:{backgroundColor:'#172B4D',padding:10,cornerRadius:8}},
     scales:{x:{grid:{display:false},ticks:{color:'#8993A4',font:{size:11}},border:{display:false}},
-    y:{position:'left',min:84,max:94,grid:{color:'#EDEFF2'},ticks:{color:'#8993A4',font:{size:10},callback:v=>v+'%'},border:{display:false}},
+    y:{position:'left',min:78,max:94,grid:{color:'#EDEFF2'},ticks:{color:'#8993A4',font:{size:10},callback:v=>v+'%'},border:{display:false}},
     y1:{position:'right',min:4,max:5,grid:{display:false},ticks:{color:'#8993A4',font:{size:10}},border:{display:false}}}}});
 }
 
 /* ---------------- NAV / ROUTER ---------------- */
-const viewMeta={dash:['运营总览','数据概览'],agents:['客服管理','客服智能体'],kb:['客服管理','知识库管理'],analytics:['分析与优化','使用分析'],issues:['分析与优化','疑难问题'],settings:['系统','系统设置']};
+const viewMeta={dash:['运营总览','数据概览'],agents:['客服管理','智能体管理'],kb:['客服管理','知识库管理'],analytics:['分析与优化','使用分析'],issues:['分析与优化','未命中意图']};
 function go(v){
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('on',n.dataset.view===v));
   document.querySelectorAll('.view').forEach(s=>s.classList.toggle('on',s.id==='view-'+v));
